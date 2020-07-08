@@ -4,132 +4,84 @@
 
 
 
-
-
-
-
-
-
-
-  
-
-
-<html class="theme-next pisces use-motion" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.8.0">
+<html lang="zh-Hans">
+<head>
   <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
 
-
-
-
-
-
-
-
-
-
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
-
-
-
-
-
-
-<link rel="stylesheet" href="/css/main.css?v=7.2.0">
-
-
-
-
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
 
 
 <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
 
 
-
-
-
-
-
-
-<script id="hexo.configurations">
+<script id="hexo-configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
     scheme: 'Pisces',
-    version: '7.2.0',
+    version: '7.4.0',
+    exturl: false,
     sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
-    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
     copycode: {"enable":true,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"save":"auto","color":"#222"},
     fancybox: false,
     mediumzoom: false,
     lazyload: false,
     pangu: false,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     algolia: {
-      applicationID: '',
+      appID: '',
       apiKey: '',
       indexName: '',
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     translation: {
       copy_button: 'Copy',
       copy_success: 'Copied',
       copy_failure: 'Copy failed'
-    }
+    },
+    sidebarPadding: 40
   };
 </script>
 
   <meta name="description" content="前言最近在给项目升级的时候,发现最新的spring4和hibernate5都使用了Gradle来构建,android studio也使用Gradle作为构建工具,尽管当前的项目使用Maven构建,我也去简单的了解了一下Gradle在java项目中的应用,做一个记录">
-<meta name="keywords" content="gradle">
 <meta property="og:type" content="article">
 <meta property="og:title" content="gradle的简单使用">
 <meta property="og:url" content="http://yoursite.com/2016/01/18/simple-gradle-learn/index.html">
 <meta property="og:site_name" content="tubei">
 <meta property="og:description" content="前言最近在给项目升级的时候,发现最新的spring4和hibernate5都使用了Gradle来构建,android studio也使用Gradle作为构建工具,尽管当前的项目使用Maven构建,我也去简单的了解了一下Gradle在java项目中的应用,做一个记录">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-31T14:37:29.867Z">
+<meta property="article:published_time" content="2016-01-18T09:39:15.000Z">
+<meta property="article:modified_time" content="2018-01-31T14:37:29.867Z">
+<meta property="article:author" content="tubei">
+<meta property="article:tag" content="gradle">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="gradle的简单使用">
-<meta name="twitter:description" content="前言最近在给项目升级的时候,发现最新的spring4和hibernate5都使用了Gradle来构建,android studio也使用Gradle作为构建工具,尽管当前的项目使用Maven构建,我也去简单的了解了一下Gradle在java项目中的应用,做一个记录">
-
-
-
-
-
-  
-  
   <link rel="canonical" href="http://yoursite.com/2016/01/18/simple-gradle-learn/">
 
 
-
-<script id="page.configurations">
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
   };
 </script>
 
-  
   <title>gradle的简单使用 | tubei</title>
   
-
-
-
-
 
 
   <script>
@@ -147,10 +99,8 @@
 
 
 
-
   <noscript>
   <style>
-  .use-motion .motion-element,
   .use-motion .brand,
   .use-motion .menu-item,
   .sidebar-inner,
@@ -159,7 +109,7 @@
   .use-motion .comments,
   .use-motion .post-header,
   .use-motion .post-body,
-  .use-motion .collection-title { opacity: initial; }
+  .use-motion .collection-header { opacity: initial; }
 
   .use-motion .logo,
   .use-motion .site-title,
@@ -176,33 +126,22 @@
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container use-motion">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
+      <div class="header-inner"><div class="site-brand-container">
   <div class="site-meta">
-    
 
-    <div class="custom-logo-site-title">
+    <div>
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">tubei</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
-    
-      
         <p class="site-subtitle">我准备好了</p>
       
-    
-    
   </div>
 
   <div class="site-nav-toggle">
@@ -215,136 +154,91 @@
 </div>
 
 
-
 <nav class="site-nav">
   
-    <ul id="menu" class="menu">
+  <ul id="menu" class="menu">
+      
+      
       
         
-        
-        
-          
-          <li class="menu-item menu-item-home">
-
-    
-    
+        <li class="menu-item menu-item-home">
       
-    
-
     
 
     <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
 
   </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-archives">
-
-    
-    
       
-    
-
-    
-
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
-
-  </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-tags">
-
-    
-    
       
-    
-
+      
+        
+        <li class="menu-item menu-item-tags">
+      
     
 
     <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
 
   </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-categories">
-
-    
-    
       
-    
-
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
     
 
     <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
 
   </li>
+      
+      
+      
         
-        
-        
-          
-          <li class="menu-item menu-item-commonweal">
-
-    
-    
+        <li class="menu-item menu-item-archives">
       
     
 
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-commonweal">
+      
     
 
     <a href="/404/" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>Commonweal 404</a>
 
   </li>
+  </ul>
 
-      
-      
-    </ul>
-  
-
-  
-
-  
 </nav>
-
-
-
 </div>
     </header>
 
     
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
 
 
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
-          
             
 
-          
           <div id="content" class="content">
             
 
   <div id="posts" class="posts-expand">
-    
-
-  
-
+      <article itemscope itemtype="http://schema.org/Article">
   
   
   
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
+  <div class="post-block post">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/01/18/simple-gradle-learn/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -356,33 +250,18 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="tubei">
     </span>
-
-    
       <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">gradle的简单使用
 
-        
-        
-          <h1 class="post-title" itemprop="name headline">gradle的简单使用
-
-              
-            
-          </h1>
-        
+          
+        </h1>
 
         <div class="post-meta">
-
-          
-          
-          
-
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
+              <span class="post-meta-item-text">Posted on</span>
 
               
                 
@@ -391,17 +270,11 @@
               <time title="Created: 2016-01-18 17:39:15" itemprop="dateCreated datePublished" datetime="2016-01-18T17:39:15+08:00">2016-01-18</time>
             </span>
           
-
-          
-
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
+              <span class="post-meta-item-text">In</span>
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/gradle/" itemprop="url" rel="index"><span itemprop="name">gradle</span></a></span>
 
@@ -412,27 +285,9 @@
           
 
           
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          <br>
-          
-
-          
-
-          
 
         </div>
       </header>
-    
 
     
     
@@ -440,113 +295,78 @@
     <div class="post-body" itemprop="articleBody">
 
       
-      
-
-      
         <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>最近在给项目升级的时候,发现最新的spring4和hibernate5都使用了<code>Gradle</code>来构建,<br><strong>android studio</strong>也使用<code>Gradle</code>作为构建工具,尽管当前的项目使用<code>Maven</code>构建,<br>我也去简单的了解了一下<code>Gradle</code>在java项目中的应用,做一个记录<br><a id="more"></a></p>
 <h3 id="Gradle是神马"><a href="#Gradle是神马" class="headerlink" title="Gradle是神马"></a><code>Gradle</code>是神马</h3><blockquote>
 <p><code>Gradle</code>是以<code>Groovy</code>语言为基础，面向Java应用为主。基于DSL（领域特定语言）语法的自动化构建工具。</p>
 </blockquote>
 <p>简单的来说,<code>Gradle</code>就是类似<code>Ant</code>,<code>Maven</code>的新一代的项目构建工具,<code>Gradle</code>是使用<code>Groovy</code>语言来声明项目设置,<br>进行项目的自动化构建.</p>
-<h3 id="Gradle的使用"><a href="#Gradle的使用" class="headerlink" title="Gradle的使用"></a><code>Gradle</code>的使用</h3><p>我的开发环境是<code>MacOS</code>和<code>Intellij-IDEA</code>,使用idea首次新建gradle项目时,会去gradle的网站下载gradle的压缩包,<br>但是由于伟大GFW保护着我们,所以下载不下来,需要自己下载相应的资源,放在<code>~/.gradle/wrapper/dists</code>目录下,然后在<br>idea中新建一个gradle项目.项目会有一个<strong>build.gradle</strong>文件,这就是<code>Gradle</code>的配置文件.<br>在使用<code>Maven</code>的时候,是使用<code>XML</code>进行依赖的声明的,比如声明spring的依赖,在<strong>pom.xml</strong>中需要这样:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.1.7.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>在<code>Gradle</code>中声明就简单的多了,在<strong>build.gradle</strong>中这样写:<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">compile(<span class="string">group:</span><span class="string">'org.springframework'</span>,<span class="string">name:</span><span class="string">'spring-core'</span>,<span class="string">version:</span><span class="string">'4.1.7.RELEASE'</span>)</span><br></pre></td></tr></table></figure></p>
-<p>或者这样写:<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">compile(<span class="string">"org.springframework:spring-core:4.1.7.RELEASE"</span>)</span><br></pre></td></tr></table></figure></p>
-<p>只需要一行,比<code>Maven</code>简明了许多.</p>
-<h3 id="gradle构建多模块项目"><a href="#gradle构建多模块项目" class="headerlink" title="gradle构建多模块项目"></a>gradle构建多模块项目</h3><p>在大型的项目中,通常会拆分成数个小的模块进行构建,<code>Gradle</code>也能做到这样,比如一个项目,有<strong>common</strong>和<strong>core</strong>两个子模块,<br>在idea中,在根项目下创建这两个<code>Gradle</code>项目,你会在根目录下发现一个<strong>setting.gradle</strong>文件,内容如下:<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rootProject.name = <span class="string">'project name'</span></span><br><span class="line">include <span class="string">'common'</span></span><br><span class="line">include <span class="string">'core'</span></span><br></pre></td></tr></table></figure></p>
-<p>然后可以在根项目的<strong>build.gradle</strong>中声明一些通用的配置:<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">subprojects &#123;<span class="comment">//子项目通用的配置,所用项目通用的可以使用allprojects</span></span><br><span class="line">    apply <span class="string">plugin:</span> <span class="string">'java'</span></span><br><span class="line">    apply(<span class="string">plugin:</span> <span class="string">'idea'</span>)</span><br><span class="line">    version = <span class="number">1.0</span></span><br><span class="line">    sourceCompatibility = <span class="number">1.8</span></span><br><span class="line">    targetCompatibility = <span class="number">1.8</span></span><br><span class="line">    <span class="comment">//maven仓库配置</span></span><br><span class="line">    repositories &#123;</span><br><span class="line">        <span class="comment">//使用国内的maven镜像</span></span><br><span class="line">        maven &#123; url <span class="string">'http://maven.oschina.net/content/groups/public/'</span> &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>然后在每个子项目的<strong>build.gradle</strong>中声明自己的配置,比如<strong>core</strong>要依赖<strong>common</strong>模块,可以这样声明:<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line"></span><br><span class="line">    compile project(<span class="string">":common"</span>)<span class="comment">//声明依赖common模块</span></span><br><span class="line">    testCompile <span class="string">group:</span> <span class="string">'junit'</span>, <span class="string">name:</span> <span class="string">'junit'</span>, <span class="string">version:</span> <span class="string">'4.11'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>在<code>Maven</code>中构建多模块项目时,通常利用<code>&lt;dependencyManagement&gt;</code>标签来统一的管理项目的依赖,子项目在引用依赖时就可以不指定<br>版本号,<code>Maven</code>会沿着父子层次向上走，直到找到一个拥有<code>dependencyManagement</code>元素的项目，然后它就会使用在这个dependencyManagement元素中指定的版本号。<br>我在<code>Gradle</code>中没有发现类似这样的标签,但是在<strong>stackOverFlow</strong>上找到了可以实现近似效果的方案,在根项目里这样声明:<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ext &#123;</span><br><span class="line">    springVersion = <span class="string">'4.1.7.RELEASE'</span></span><br><span class="line">    libraries = [<span class="comment">//Groovy中的数组</span></span><br><span class="line">        <span class="string">springCore :</span> <span class="string">"org.springframework:spring-core:$springVersion"</span></span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>然后在子项目中这样引用:<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    compile(project(<span class="string">":common"</span>))</span><br><span class="line">    compile(libraries.springCore)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>这样就可以在根项目中统一管理子项目依赖的版本了.</p>
+<h3 id="Gradle的使用"><a href="#Gradle的使用" class="headerlink" title="Gradle的使用"></a><code>Gradle</code>的使用</h3><p>我的开发环境是<code>MacOS</code>和<code>Intellij-IDEA</code>,使用idea首次新建gradle项目时,会去gradle的网站下载gradle的压缩包,<br>但是由于伟大GFW保护着我们,所以下载不下来,需要自己下载相应的资源,放在<code>~/.gradle/wrapper/dists</code>目录下,然后在<br>idea中新建一个gradle项目.项目会有一个<strong>build.gradle</strong>文件,这就是<code>Gradle</code>的配置文件.<br>在使用<code>Maven</code>的时候,是使用<code>XML</code>进行依赖的声明的,比如声明spring的依赖,在<strong>pom.xml</strong>中需要这样:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.1.7.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure><br>在<code>Gradle</code>中声明就简单的多了,在<strong>build.gradle</strong>中这样写:<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">compile(<span class="string">group:</span><span class="string">'org.springframework'</span>,<span class="string">name:</span><span class="string">'spring-core'</span>,<span class="string">version:</span><span class="string">'4.1.7.RELEASE'</span>)</span><br></pre></td></tr></table></figure><br>或者这样写:<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">compile(<span class="string">"org.springframework:spring-core:4.1.7.RELEASE"</span>)</span><br></pre></td></tr></table></figure><br>只需要一行,比<code>Maven</code>简明了许多.</p>
+<h3 id="gradle构建多模块项目"><a href="#gradle构建多模块项目" class="headerlink" title="gradle构建多模块项目"></a>gradle构建多模块项目</h3><p>在大型的项目中,通常会拆分成数个小的模块进行构建,<code>Gradle</code>也能做到这样,比如一个项目,有<strong>common</strong>和<strong>core</strong>两个子模块,<br>在idea中,在根项目下创建这两个<code>Gradle</code>项目,你会在根目录下发现一个<strong>setting.gradle</strong>文件,内容如下:<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rootProject.name = <span class="string">'project name'</span></span><br><span class="line">include <span class="string">'common'</span></span><br><span class="line">include <span class="string">'core'</span></span><br></pre></td></tr></table></figure><br>然后可以在根项目的<strong>build.gradle</strong>中声明一些通用的配置:<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">subprojects &#123;<span class="comment">//子项目通用的配置,所用项目通用的可以使用allprojects</span></span><br><span class="line">    apply <span class="string">plugin:</span> <span class="string">'java'</span></span><br><span class="line">    apply(<span class="string">plugin:</span> <span class="string">'idea'</span>)</span><br><span class="line">    version = <span class="number">1.0</span></span><br><span class="line">    sourceCompatibility = <span class="number">1.8</span></span><br><span class="line">    targetCompatibility = <span class="number">1.8</span></span><br><span class="line">    <span class="comment">//maven仓库配置</span></span><br><span class="line">    repositories &#123;</span><br><span class="line">        <span class="comment">//使用国内的maven镜像</span></span><br><span class="line">        maven &#123; url <span class="string">'http://maven.oschina.net/content/groups/public/'</span> &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>然后在每个子项目的<strong>build.gradle</strong>中声明自己的配置,比如<strong>core</strong>要依赖<strong>common</strong>模块,可以这样声明:<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line"></span><br><span class="line">    compile project(<span class="string">":common"</span>)<span class="comment">//声明依赖common模块</span></span><br><span class="line">    testCompile <span class="string">group:</span> <span class="string">'junit'</span>, <span class="string">name:</span> <span class="string">'junit'</span>, <span class="string">version:</span> <span class="string">'4.11'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>在<code>Maven</code>中构建多模块项目时,通常利用<code>&lt;dependencyManagement&gt;</code>标签来统一的管理项目的依赖,子项目在引用依赖时就可以不指定<br>版本号,<code>Maven</code>会沿着父子层次向上走，直到找到一个拥有<code>dependencyManagement</code>元素的项目，然后它就会使用在这个dependencyManagement元素中指定的版本号。<br>我在<code>Gradle</code>中没有发现类似这样的标签,但是在<strong>stackOverFlow</strong>上找到了可以实现近似效果的方案,在根项目里这样声明:<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ext &#123;</span><br><span class="line">    springVersion = <span class="string">'4.1.7.RELEASE'</span></span><br><span class="line">    libraries = [<span class="comment">//Groovy中的数组</span></span><br><span class="line">        <span class="string">springCore :</span> <span class="string">"org.springframework:spring-core:$springVersion"</span></span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>然后在子项目中这样引用:<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    compile(project(<span class="string">":common"</span>))</span><br><span class="line">    compile(libraries.springCore)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>这样就可以在根项目中统一管理子项目依赖的版本了.</p>
 <p>因为使用了<code>Groovy</code>声明配置,比<code>Maven</code>的配置声明要简洁上一些,作为一个强大的项目自动化构建工具,以上只是<code>Gradle</code>最简单的应用,<br>它还有许多强大的功能待我以后去慢慢了解.</p>
 
-      
     </div>
 
     
-
-    
-      
-    
-
     
     
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
         
-          
-        
-        <div class="post-tags">
-          
-            <a href="/tags/gradle/" rel="tag"># gradle</a>
-          
-        </div>
       
 
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
+      <footer class="post-footer">
+          
             
-              <a href="/2016/01/17/python-shell-escape-arrow-keys/" rel="next" title="python shell 方向键乱码">
-                <i class="fa fa-chevron-left"></i> python shell 方向键乱码
-              </a>
+          
+          <div class="post-tags">
+            
+              <a href="/tags/gradle/" rel="tag"># gradle</a>
             
           </div>
+        
 
-          <span class="post-nav-divider"></span>
+        
 
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/02/19/spring-boot-properties-Chinese-garbled/" rel="prev" title="spring boot properties中文乱码">
-                spring boot properties中文乱码 <i class="fa fa-chevron-right"></i>
-              </a>
-            
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2016/01/17/python-shell-escape-arrow-keys/" rel="next" title="python shell 方向键乱码">
+                  <i class="fa fa-chevron-left"></i> python shell 方向键乱码
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2016/02/19/spring-boot-properties-Chinese-garbled/" rel="prev" title="spring boot properties中文乱码">
+                  spring boot properties中文乱码 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
           </div>
-        </div>
-      
-
-      
-      
-    </footer>
+        
+      </footer>
+    
   </div>
   
   
   
   </article>
 
-
   </div>
 
 
           </div>
           
-
+    
+    
+  <div class="comments" id="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC8zMzMwNS85ODYy"></div>
+  </div>
   
-    <div class="comments" id="comments">
-      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMzMwNS85ODYy"></div>
-    </div>
-
   
-
-
 
         </div>
-        
           
   
   <div class="sidebar-toggle">
@@ -557,151 +377,70 @@
     </div>
   </div>
 
-  <aside id="sidebar" class="sidebar">
+  <aside class="sidebar">
     <div class="sidebar-inner">
-
+        
+        
+        
+        
       
 
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gradle是神马"><span class="nav-number">2.</span> <span class="nav-text">Gradle是神马</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gradle的使用"><span class="nav-number">3.</span> <span class="nav-text">Gradle的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gradle构建多模块项目"><span class="nav-number">4.</span> <span class="nav-text">gradle构建多模块项目</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
 
       <div class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  
-    <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="tubei">
-  
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/uploads/avatar.png"
+      alt="tubei">
   <p class="site-author-name" itemprop="name">tubei</p>
-  <div class="site-description motion-element" itemprop="description">一只程序员的小屋</div>
+  <div class="site-description" itemprop="description">一只程序员的小屋</div>
 </div>
-
-
   <nav class="site-state motion-element">
-    
       <div class="site-state-item site-state-posts">
         
-          <a href="/archives/">
+          <a href="/archives/%20%7C%7C%20archive">
         
-          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
-    
-
     
       
       
       <div class="site-state-item site-state-categories">
         
           
-            <a href="/categories/">
+            <a href="/categories/%20%7C%7C%20th">
           
         
-        
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">categories</span>
         </a>
       </div>
-    
-
     
       
       
       <div class="site-state-item site-state-tags">
         
           
-            <a href="/tags/">
+            <a href="/tags/%20%7C%7C%20tags">
           
         
-        
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">tags</span>
         </a>
       </div>
@@ -710,79 +449,33 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-          
-          
-        </div>
       </div>
-
-      
-      <!--noindex-->
-        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-            
-            
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gradle是神马"><span class="nav-number">2.</span> <span class="nav-text">Gradle是神马</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gradle的使用"><span class="nav-number">3.</span> <span class="nav-text">Gradle的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gradle构建多模块项目"><span class="nav-number">4.</span> <span class="nav-text">gradle构建多模块项目</span></a></li></ol></div>
-            
-
-          </div>
-        </div>
-      <!--/noindex-->
-      
-
-      
 
     </div>
   </aside>
   <div id="sidebar-dimmer"></div>
 
 
-        
       </div>
     </main>
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">tubei</span>
-
-  
-
-  
 </div>
-
-
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
-
-
-
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.1</div>
   <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.2.0</div>
-
-
-
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.4.0</div>
 
         
+
+
+
+
 
 
 
@@ -794,106 +487,39 @@
         
       </div>
     </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
-    
-
-    
-
-    
-
   </div>
 
   
 
-<script>
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-
-
-
-
-
-
-
-
-
-  
-  <script src="/lib/jquery/index.js?v=3.4.1"></script>
-
-  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
   <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
   <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
 
+<script src="/js/utils.js?v=7.4.0.js"></script>
+
+<script src="/js/motion.js?v=7.4.0.js"></script>
 
 
-
-  <script src="/js/utils.js?v=7.2.0"></script>
-
-  <script src="/js/motion.js?v=7.2.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0.js"></script>
 
 
+<script src="/js/next-boot.js?v=7.4.0.js"></script>
 
-  
-  
-
-
-  <script src="/js/affix.js?v=7.2.0"></script>
-
-  <script src="/js/schemes/pisces.js?v=7.2.0"></script>
 
 
 
   
-  <script src="/js/scrollspy.js?v=7.2.0"></script>
-<script src="/js/post-details.js?v=7.2.0"></script>
 
 
 
-  <script src="/js/next-boot.js?v=7.2.0"></script>
-
-  
-
-  
-
-  
 
 
-  
-  
 
-  
-  
 
-  
+
+
+
 
 
 
@@ -906,12 +532,16 @@
 
 
   
-    
 
+  
+
+  
+
+  
 
 <script>
   window.livereOptions = {
-    refer: '2016/01/18/simple-gradle-learn/'
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
   };
   (function(d, s) {
     var j, e = d.getElementsByTagName(s)[0];
@@ -922,50 +552,6 @@
     e.parentNode.insertBefore(j, e);
   })(document, 'script');
 </script>
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script>
-// GET RESPONSIVE HEIGHT PASSED FROM IFRAME
-
-window.addEventListener("message", function(e) {
-  var data = e.data;
-  if ((typeof data === 'string') && (data.indexOf('ciu_embed') > -1)) {
-    var featureID = data.split(':')[1];
-    var height = data.split(':')[2];
-    $(`iframe[data-feature=${featureID}]`).height(parseInt(height) + 30);
-  }
-}, false);
-</script>
-
-
-
-
-
-
-
-
-  
 
 </body>
 </html>

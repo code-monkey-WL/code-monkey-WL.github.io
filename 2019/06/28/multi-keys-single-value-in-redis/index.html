@@ -4,132 +4,85 @@
 
 
 
-
-
-
-
-
-
-
-  
-
-
-<html class="theme-next pisces use-motion" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.8.0">
+<html lang="zh-Hans">
+<head>
   <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
 
-
-
-
-
-
-
-
-
-
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
-
-
-
-
-
-
-<link rel="stylesheet" href="/css/main.css?v=7.2.0">
-
-
-
-
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
 
 
 <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
 
 
-
-
-
-
-
-
-<script id="hexo.configurations">
+<script id="hexo-configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
     scheme: 'Pisces',
-    version: '7.2.0',
+    version: '7.4.0',
+    exturl: false,
     sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
-    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
     copycode: {"enable":true,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"save":"auto","color":"#222"},
     fancybox: false,
     mediumzoom: false,
     lazyload: false,
     pangu: false,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     algolia: {
-      applicationID: '',
+      appID: '',
       apiKey: '',
       indexName: '',
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     translation: {
       copy_button: 'Copy',
       copy_success: 'Copied',
       copy_failure: 'Copy failed'
-    }
+    },
+    sidebarPadding: 40
   };
 </script>
 
   <meta name="description" content="因为业务的需要，在 redis 中通过 lua 脚本简单实现了多个key 对应单个 value 的功能。">
-<meta name="keywords" content="cache,redis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="redis实现多个 key 对应一个 value">
 <meta property="og:url" content="http://yoursite.com/2019/06/28/multi-keys-single-value-in-redis/index.html">
 <meta property="og:site_name" content="tubei">
 <meta property="og:description" content="因为业务的需要，在 redis 中通过 lua 脚本简单实现了多个key 对应单个 value 的功能。">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-11T02:02:05.894Z">
+<meta property="article:published_time" content="2019-06-28T08:03:09.000Z">
+<meta property="article:modified_time" content="2020-07-07T12:18:00.816Z">
+<meta property="article:author" content="tubei">
+<meta property="article:tag" content="cache">
+<meta property="article:tag" content="redis">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="redis实现多个 key 对应一个 value">
-<meta name="twitter:description" content="因为业务的需要，在 redis 中通过 lua 脚本简单实现了多个key 对应单个 value 的功能。">
-
-
-
-
-
-  
-  
   <link rel="canonical" href="http://yoursite.com/2019/06/28/multi-keys-single-value-in-redis/">
 
 
-
-<script id="page.configurations">
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
   };
 </script>
 
-  
   <title>redis实现多个 key 对应一个 value | tubei</title>
   
-
-
-
-
 
 
   <script>
@@ -147,10 +100,8 @@
 
 
 
-
   <noscript>
   <style>
-  .use-motion .motion-element,
   .use-motion .brand,
   .use-motion .menu-item,
   .sidebar-inner,
@@ -159,7 +110,7 @@
   .use-motion .comments,
   .use-motion .post-header,
   .use-motion .post-body,
-  .use-motion .collection-title { opacity: initial; }
+  .use-motion .collection-header { opacity: initial; }
 
   .use-motion .logo,
   .use-motion .site-title,
@@ -176,33 +127,22 @@
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container use-motion">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
+      <div class="header-inner"><div class="site-brand-container">
   <div class="site-meta">
-    
 
-    <div class="custom-logo-site-title">
+    <div>
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">tubei</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
-    
-      
         <p class="site-subtitle">我准备好了</p>
       
-    
-    
   </div>
 
   <div class="site-nav-toggle">
@@ -215,136 +155,91 @@
 </div>
 
 
-
 <nav class="site-nav">
   
-    <ul id="menu" class="menu">
+  <ul id="menu" class="menu">
+      
+      
       
         
-        
-        
-          
-          <li class="menu-item menu-item-home">
-
-    
-    
+        <li class="menu-item menu-item-home">
       
-    
-
     
 
     <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
 
   </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-archives">
-
-    
-    
       
-    
-
-    
-
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
-
-  </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-tags">
-
-    
-    
       
-    
-
+      
+        
+        <li class="menu-item menu-item-tags">
+      
     
 
     <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
 
   </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-categories">
-
-    
-    
       
-    
-
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
     
 
     <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
 
   </li>
+      
+      
+      
         
-        
-        
-          
-          <li class="menu-item menu-item-commonweal">
-
-    
-    
+        <li class="menu-item menu-item-archives">
       
     
 
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-commonweal">
+      
     
 
     <a href="/404/" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>Commonweal 404</a>
 
   </li>
+  </ul>
 
-      
-      
-    </ul>
-  
-
-  
-
-  
 </nav>
-
-
-
 </div>
     </header>
 
     
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
 
 
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
-          
             
 
-          
           <div id="content" class="content">
             
 
   <div id="posts" class="posts-expand">
-    
-
-  
-
+      <article itemscope itemtype="http://schema.org/Article">
   
   
   
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
+  <div class="post-block post">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/28/multi-keys-single-value-in-redis/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -356,33 +251,18 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="tubei">
     </span>
-
-    
       <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">redis实现多个 key 对应一个 value
 
-        
-        
-          <h1 class="post-title" itemprop="name headline">redis实现多个 key 对应一个 value
-
-              
-            
-          </h1>
-        
+          
+        </h1>
 
         <div class="post-meta">
-
-          
-          
-          
-
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
+              <span class="post-meta-item-text">Posted on</span>
 
               
                 
@@ -391,17 +271,11 @@
               <time title="Created: 2019-06-28 16:03:09" itemprop="dateCreated datePublished" datetime="2019-06-28T16:03:09+08:00">2019-06-28</time>
             </span>
           
-
-          
-
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
+              <span class="post-meta-item-text">In</span>
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a></span>
 
@@ -412,27 +286,9 @@
           
 
           
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          <br>
-          
-
-          
-
-          
 
         </div>
       </header>
-    
 
     
     
@@ -440,12 +296,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-      
-
-      
         <p>因为业务的需要，在 redis 中通过 lua 脚本简单实现了多个key 对应单个 value 的功能。<br><a id="more"></a></p>
 <h4 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h4><p>在负责一个和硬件进行通信的项目时，硬件通过 MQTT 队列上报信息，信息经过处理保存在 redis 缓存中，每个设备都有两个唯一标识的属性: sn序列号 和 硬件MAC 地址。希望能够通过 sn 或者 mac 地址都能查询到缓存中的信息，对于这种需求，其实在redis 这么保存既可：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sn = deviceInfo</span><br><span class="line">mac = deviceInfo</span><br></pre></td></tr></table></figure>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">sn</span> = <span class="string">deviceInfo</span></span><br><span class="line"><span class="attr">mac</span> = <span class="string">deviceInfo</span></span><br></pre></td></tr></table></figure>
 <p>但是这么做的缺点也很明显，多占用了一倍的存储空间，通过查询相关资料，redis 目前并不支持多个 key 对应单个 value 的数据结构，详见<a href="https://github.com/antirez/redis/issues/2668" target="_blank" rel="noopener">#issue2668</a>。</p>
 <p>这个功能应该还是比较常用的，比如对于用户信息，用户ID 和邮箱都是唯一的，通过其中一个即可获取用户信息。其实对于这类的需求，常规做法是 redis 只保存 ID 和用户信息的对应，查询的时候我们根据邮箱先查询出用户的 ID，再去 redis 查找对应的信息。</p>
 <p>而通过 lua 脚本扩展 redis 实现这种功能，算是个比较另辟蹊径的想法，这里记录一下我简单的实现。</p>
@@ -454,109 +307,85 @@
 <p>一个合格的程序员是不会写出诸如 “摧毁地球” 这样的程序的，他们会写一个函数叫 “摧毁行星”而把地球当一个参数传进去。</p>
 </blockquote>
 <p>接下来考虑，数据在 redis 中如何保存。对于这种结构的数据：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[key1, key2, key3] = value</span><br></pre></td></tr></table></figure>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">[key1,</span> <span class="string">key2, key3] = value</span></span><br></pre></td></tr></table></figure>
 <p>我打算这么存储：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">key1=value</span><br><span class="line">key2=key1</span><br><span class="line">key3=key1</span><br></pre></td></tr></table></figure>
-<p>这样就避免了的更多的空间占用</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">key1</span>=<span class="string">value</span></span><br><span class="line"><span class="attr">key2</span>=<span class="string">key1</span></span><br><span class="line"><span class="attr">key3</span>=<span class="string">key1</span></span><br></pre></td></tr></table></figure>
+<p>这样就避免了的更多的空间占用，这需要在 redis 中执行多个指令，为了保证多个指令的原子性，使用 lua 脚本来处理</p>
 <h5 id="set"><a href="#set" class="headerlink" title="set"></a>set</h5><p>直接上 lua 脚本吧</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> prefix = <span class="string">'xxxx_multi_'</span></span><br><span class="line">redis.call(<span class="string">'setex'</span>, KEYS[<span class="number">1</span>], ARGV[<span class="number">2</span>], ARGV[<span class="number">1</span>])</span><br><span class="line"><span class="keyword">local</span> <span class="built_in">len</span> = <span class="built_in">table</span>.<span class="built_in">getn</span>(KEYS)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i = <span class="number">2</span>, <span class="built_in">len</span> <span class="keyword">do</span></span><br><span class="line">    redis.call(<span class="string">'setex'</span>, KEYS[i], ARGV[<span class="number">2</span>], prefix .. KEYS[<span class="number">1</span>])</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
 <p>设置<code>prefix</code> 的原因是通过设置一个比较复杂的前缀，避免和项目中的值冲突，以区分是不是用来关联的 value。然后在代码中封装起来，以供用户方便的调用:</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * set multi keys to single value</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setMultiKeysOneValue</span><span class="params">(String value, <span class="keyword">int</span> expires, String... keys)</span> </span>&#123;</span><br><span class="line">  redisTemplate.execute(<span class="keyword">new</span> DefaultRedisScript&lt;&gt;(multiKeysSetScript), Arrays.asList(keys), value, expires);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h5 id="get"><a href="#get" class="headerlink" title="get"></a>get</h5><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> prefix = <span class="string">'xxxx_multi_'</span></span><br><span class="line"><span class="keyword">local</span> val = redis.call(<span class="string">'get'</span>, KEYS[<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line"><span class="keyword">local</span> invald_keys = &#123; KEYS[<span class="number">1</span>] &#125;</span><br><span class="line"><span class="comment">-- 如果 val 前缀匹配 prefix，则以截去 prefix，以 val 做 key 继续向下寻找</span></span><br><span class="line"><span class="keyword">while</span> (<span class="built_in">type</span>(val) == <span class="string">'string'</span> <span class="keyword">and</span> <span class="built_in">string</span>.<span class="built_in">sub</span>(val, <span class="number">1</span>, #prefix) == prefix)</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">    val = redis.call(<span class="string">'get'</span>, <span class="built_in">string</span>.<span class="built_in">sub</span>(val, #prefix + <span class="number">1</span>))</span><br><span class="line">    <span class="built_in">table</span>.<span class="built_in">insert</span>(invald_keys, val)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">type</span>(val) == <span class="string">'boolean'</span> <span class="keyword">and</span> (<span class="keyword">not</span> val)) <span class="keyword">then</span></span><br><span class="line">    <span class="keyword">for</span> i = <span class="number">1</span>, #invald_keys - <span class="number">1</span> <span class="keyword">do</span></span><br><span class="line">        redis.call(<span class="string">'del'</span>, invald_keys[i])</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> val</span><br></pre></td></tr></table></figure>
 <p>这里使用了一个队列来保存查询路径上的 key，如果最后查询不到结果，将之前查询过的 key 都删除，避免删除了主 key 的时候，其他 key 必须等到到期时间。java 代码封装如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getByOneKey</span><span class="params">(String key)</span> </span>&#123;</span><br><span class="line">  String value = redisTemplate.execute(<span class="keyword">new</span> DefaultRedisScript&lt;&gt;(multiKeysGetScript, String.class), Collections.singletonList(key));</span><br><span class="line">  <span class="keyword">return</span> value</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getByOneKey</span><span class="params">(String key)</span> </span>&#123;</span><br><span class="line">  String value = redisTemplate.execute(<span class="keyword">new</span> DefaultRedisScript&lt;&gt;(multiKeysGetScript, String<span class="class">.<span class="keyword">class</span>), <span class="title">Collections</span>.<span class="title">singletonList</span>(<span class="title">key</span>))</span>;</span><br><span class="line">  <span class="keyword">return</span> value</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>删除的实现比较简单，这里就不贴代码了</p>
 <h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>以上的实现还比较简陋，主 key 对其他关联 key 的存在是感知不到的，因此删除的时候无法将全部的 key 都删除，只能依赖 redis 的过期机制，后续待改进，可以考虑使用 map 来保存主 key 和关联 key 之间的关系。</p>
 
-      
     </div>
 
     
-
-    
-      
-    
-
     
     
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
         
-          
-        
-        <div class="post-tags">
-          
-            <a href="/tags/cache/" rel="tag"># cache</a>
-          
-            <a href="/tags/redis/" rel="tag"># redis</a>
-          
-        </div>
       
 
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
+      <footer class="post-footer">
+          
             
-              <a href="/2019/03/27/talking-about-unit-test/" rel="next" title="谈谈项目中的单元测试">
-                <i class="fa fa-chevron-left"></i> 谈谈项目中的单元测试
-              </a>
+          
+          <div class="post-tags">
+            
+              <a href="/tags/cache/" rel="tag"># cache</a>
+            
+              <a href="/tags/redis/" rel="tag"># redis</a>
             
           </div>
+        
 
-          <span class="post-nav-divider"></span>
+        
 
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/08/11/simple-mqtt-cui-written-golang/" rel="prev" title="使用 go 写个简单的 MQTT-cui">
-                使用 go 写个简单的 MQTT-cui <i class="fa fa-chevron-right"></i>
-              </a>
-            
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/03/27/talking-about-unit-test/" rel="next" title="谈谈项目中的单元测试">
+                  <i class="fa fa-chevron-left"></i> 谈谈项目中的单元测试
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/08/11/simple-mqtt-cui-written-golang/" rel="prev" title="使用 go 写个简单的 MQTT-cui">
+                  使用 go 写个简单的 MQTT-cui <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
           </div>
-        </div>
-      
-
-      
-      
-    </footer>
+        
+      </footer>
+    
   </div>
   
   
   
   </article>
 
-
   </div>
 
 
           </div>
           
-
+    
+    
+  <div class="comments" id="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC8zMzMwNS85ODYy"></div>
+  </div>
   
-    <div class="comments" id="comments">
-      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMzMwNS85ODYy"></div>
-    </div>
-
   
-
-
 
         </div>
-        
           
   
   <div class="sidebar-toggle">
@@ -567,151 +396,70 @@
     </div>
   </div>
 
-  <aside id="sidebar" class="sidebar">
+  <aside class="sidebar">
     <div class="sidebar-inner">
-
+        
+        
+        
+        
       
 
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实现"><span class="nav-number">2.</span> <span class="nav-text">实现</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#set"><span class="nav-number">2.1.</span> <span class="nav-text">set</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#get"><span class="nav-number">2.2.</span> <span class="nav-text">get</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
 
       <div class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  
-    <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="tubei">
-  
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/uploads/avatar.png"
+      alt="tubei">
   <p class="site-author-name" itemprop="name">tubei</p>
-  <div class="site-description motion-element" itemprop="description">一只程序员的小屋</div>
+  <div class="site-description" itemprop="description">一只程序员的小屋</div>
 </div>
-
-
   <nav class="site-state motion-element">
-    
       <div class="site-state-item site-state-posts">
         
-          <a href="/archives/">
+          <a href="/archives/%20%7C%7C%20archive">
         
-          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
-    
-
     
       
       
       <div class="site-state-item site-state-categories">
         
           
-            <a href="/categories/">
+            <a href="/categories/%20%7C%7C%20th">
           
         
-        
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">categories</span>
         </a>
       </div>
-    
-
     
       
       
       <div class="site-state-item site-state-tags">
         
           
-            <a href="/tags/">
+            <a href="/tags/%20%7C%7C%20tags">
           
         
-        
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">tags</span>
         </a>
       </div>
@@ -720,79 +468,33 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-          
-          
-        </div>
       </div>
-
-      
-      <!--noindex-->
-        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-            
-            
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实现"><span class="nav-number">2.</span> <span class="nav-text">实现</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#set"><span class="nav-number">2.1.</span> <span class="nav-text">set</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#get"><span class="nav-number">2.2.</span> <span class="nav-text">get</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
-            
-
-          </div>
-        </div>
-      <!--/noindex-->
-      
-
-      
 
     </div>
   </aside>
   <div id="sidebar-dimmer"></div>
 
 
-        
       </div>
     </main>
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">tubei</span>
-
-  
-
-  
 </div>
-
-
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
-
-
-
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.1</div>
   <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.2.0</div>
-
-
-
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.4.0</div>
 
         
+
+
+
+
 
 
 
@@ -804,106 +506,39 @@
         
       </div>
     </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
-    
-
-    
-
-    
-
   </div>
 
   
 
-<script>
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-
-
-
-
-
-
-
-
-
-  
-  <script src="/lib/jquery/index.js?v=3.4.1"></script>
-
-  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
   <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
   <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
 
+<script src="/js/utils.js?v=7.4.0.js"></script>
+
+<script src="/js/motion.js?v=7.4.0.js"></script>
 
 
-
-  <script src="/js/utils.js?v=7.2.0"></script>
-
-  <script src="/js/motion.js?v=7.2.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0.js"></script>
 
 
+<script src="/js/next-boot.js?v=7.4.0.js"></script>
 
-  
-  
-
-
-  <script src="/js/affix.js?v=7.2.0"></script>
-
-  <script src="/js/schemes/pisces.js?v=7.2.0"></script>
 
 
 
   
-  <script src="/js/scrollspy.js?v=7.2.0"></script>
-<script src="/js/post-details.js?v=7.2.0"></script>
 
 
 
-  <script src="/js/next-boot.js?v=7.2.0"></script>
-
-  
-
-  
-
-  
 
 
-  
-  
 
-  
-  
 
-  
+
+
+
 
 
 
@@ -916,12 +551,16 @@
 
 
   
-    
 
+  
+
+  
+
+  
 
 <script>
   window.livereOptions = {
-    refer: '2019/06/28/multi-keys-single-value-in-redis/'
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
   };
   (function(d, s) {
     var j, e = d.getElementsByTagName(s)[0];
@@ -932,50 +571,6 @@
     e.parentNode.insertBefore(j, e);
   })(document, 'script');
 </script>
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script>
-// GET RESPONSIVE HEIGHT PASSED FROM IFRAME
-
-window.addEventListener("message", function(e) {
-  var data = e.data;
-  if ((typeof data === 'string') && (data.indexOf('ciu_embed') > -1)) {
-    var featureID = data.split(':')[1];
-    var height = data.split(':')[2];
-    $(`iframe[data-feature=${featureID}]`).height(parseInt(height) + 30);
-  }
-}, false);
-</script>
-
-
-
-
-
-
-
-
-  
 
 </body>
 </html>

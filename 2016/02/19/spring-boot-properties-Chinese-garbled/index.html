@@ -4,132 +4,84 @@
 
 
 
-
-
-
-
-
-
-
-  
-
-
-<html class="theme-next pisces use-motion" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.8.0">
+<html lang="zh-Hans">
+<head>
   <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
 
-
-
-
-
-
-
-
-
-
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
-
-
-
-
-
-
-<link rel="stylesheet" href="/css/main.css?v=7.2.0">
-
-
-
-
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
 
 
 <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
 
 
-
-
-
-
-
-
-<script id="hexo.configurations">
+<script id="hexo-configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
     scheme: 'Pisces',
-    version: '7.2.0',
+    version: '7.4.0',
+    exturl: false,
     sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
-    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
     copycode: {"enable":true,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"save":"auto","color":"#222"},
     fancybox: false,
     mediumzoom: false,
     lazyload: false,
     pangu: false,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     algolia: {
-      applicationID: '',
+      appID: '',
       apiKey: '',
       indexName: '',
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     translation: {
       copy_button: 'Copy',
       copy_success: 'Copied',
       copy_failure: 'Copy failed'
-    }
+    },
+    sidebarPadding: 40
   };
 </script>
 
   <meta name="description" content="前言最近在用spring boot框架做项目的时候，使用hibernate-validation校验的时候的时候，配置在ValidationMessages.properties里面的中文的时候出现了乱码现象，在此记录一下解决过程，以备忘。">
-<meta name="keywords" content="spring">
 <meta property="og:type" content="article">
 <meta property="og:title" content="spring boot properties中文乱码">
 <meta property="og:url" content="http://yoursite.com/2016/02/19/spring-boot-properties-Chinese-garbled/index.html">
 <meta property="og:site_name" content="tubei">
 <meta property="og:description" content="前言最近在用spring boot框架做项目的时候，使用hibernate-validation校验的时候的时候，配置在ValidationMessages.properties里面的中文的时候出现了乱码现象，在此记录一下解决过程，以备忘。">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-31T14:37:29.868Z">
+<meta property="article:published_time" content="2016-02-19T11:11:17.000Z">
+<meta property="article:modified_time" content="2018-01-31T14:37:29.868Z">
+<meta property="article:author" content="tubei">
+<meta property="article:tag" content="spring">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="spring boot properties中文乱码">
-<meta name="twitter:description" content="前言最近在用spring boot框架做项目的时候，使用hibernate-validation校验的时候的时候，配置在ValidationMessages.properties里面的中文的时候出现了乱码现象，在此记录一下解决过程，以备忘。">
-
-
-
-
-
-  
-  
   <link rel="canonical" href="http://yoursite.com/2016/02/19/spring-boot-properties-Chinese-garbled/">
 
 
-
-<script id="page.configurations">
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
   };
 </script>
 
-  
   <title>spring boot properties中文乱码 | tubei</title>
   
-
-
-
-
 
 
   <script>
@@ -147,10 +99,8 @@
 
 
 
-
   <noscript>
   <style>
-  .use-motion .motion-element,
   .use-motion .brand,
   .use-motion .menu-item,
   .sidebar-inner,
@@ -159,7 +109,7 @@
   .use-motion .comments,
   .use-motion .post-header,
   .use-motion .post-body,
-  .use-motion .collection-title { opacity: initial; }
+  .use-motion .collection-header { opacity: initial; }
 
   .use-motion .logo,
   .use-motion .site-title,
@@ -176,33 +126,22 @@
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container use-motion">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
+      <div class="header-inner"><div class="site-brand-container">
   <div class="site-meta">
-    
 
-    <div class="custom-logo-site-title">
+    <div>
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">tubei</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
-    
-      
         <p class="site-subtitle">我准备好了</p>
       
-    
-    
   </div>
 
   <div class="site-nav-toggle">
@@ -215,136 +154,91 @@
 </div>
 
 
-
 <nav class="site-nav">
   
-    <ul id="menu" class="menu">
+  <ul id="menu" class="menu">
+      
+      
       
         
-        
-        
-          
-          <li class="menu-item menu-item-home">
-
-    
-    
+        <li class="menu-item menu-item-home">
       
-    
-
     
 
     <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
 
   </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-archives">
-
-    
-    
       
-    
-
-    
-
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
-
-  </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-tags">
-
-    
-    
       
-    
-
+      
+        
+        <li class="menu-item menu-item-tags">
+      
     
 
     <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
 
   </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-categories">
-
-    
-    
       
-    
-
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
     
 
     <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
 
   </li>
+      
+      
+      
         
-        
-        
-          
-          <li class="menu-item menu-item-commonweal">
-
-    
-    
+        <li class="menu-item menu-item-archives">
       
     
 
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-commonweal">
+      
     
 
     <a href="/404/" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>Commonweal 404</a>
 
   </li>
+  </ul>
 
-      
-      
-    </ul>
-  
-
-  
-
-  
 </nav>
-
-
-
 </div>
     </header>
 
     
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
 
 
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
-          
             
 
-          
           <div id="content" class="content">
             
 
   <div id="posts" class="posts-expand">
-    
-
-  
-
+      <article itemscope itemtype="http://schema.org/Article">
   
   
   
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
+  <div class="post-block post">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/02/19/spring-boot-properties-Chinese-garbled/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -356,33 +250,18 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="tubei">
     </span>
-
-    
       <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">spring boot properties中文乱码
 
-        
-        
-          <h1 class="post-title" itemprop="name headline">spring boot properties中文乱码
-
-              
-            
-          </h1>
-        
+          
+        </h1>
 
         <div class="post-meta">
-
-          
-          
-          
-
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
+              <span class="post-meta-item-text">Posted on</span>
 
               
                 
@@ -391,17 +270,11 @@
               <time title="Created: 2016-02-19 19:11:17" itemprop="dateCreated datePublished" datetime="2016-02-19T19:11:17+08:00">2016-02-19</time>
             </span>
           
-
-          
-
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
+              <span class="post-meta-item-text">In</span>
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a></span>
 
@@ -412,27 +285,9 @@
           
 
           
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          <br>
-          
-
-          
-
-          
 
         </div>
       </header>
-    
 
     
     
@@ -440,115 +295,83 @@
     <div class="post-body" itemprop="articleBody">
 
       
-      
-
-      
         <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>最近在用spring boot框架做项目的时候，使用<code>hibernate-validation</code>校验的时候的时候，配置在<code>ValidationMessages.properties</code>里面的中文的时候出现了乱码现象，在此记录一下解决过程，以备忘。<br><a id="more"></a></p>
-<h4 id="解决过程"><a href="#解决过程" class="headerlink" title="解决过程"></a>解决过程</h4><p>spring-boot会默认使用<code>ValidationMessages.properties</code>作为解析错误信息的文件。<br>首先我觉得应该是<code>properties</code>文件自身的编码问题，因为我使用的是<code>Intellij IDEA</code>开发,它默认的properties文件的编码是系统默认编码，在我的window上是<code>GBK</code>编码，所以首先修改了<code>properties</code>文件的编码类型，选择<code>File-&gt;setting-&gt;File Encoding</code>选择<code>properties</code>文件，修改编码为<code>UTF-8</code>但是仍未解决乱码问题。<br>后来大致阅读了部分源码才发现了问题所在:<br>WebConfigurerComposite.java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Validator <span class="title">getValidator</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	Validator selected = <span class="keyword">null</span>;</span><br><span class="line">	<span class="keyword">for</span> (WebMvcConfigurer configurer : <span class="keyword">this</span>.delegates) &#123;</span><br><span class="line">		Validator validator = configurer.getValidator();</span><br><span class="line">		<span class="keyword">if</span> (validator != <span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span> (selected != <span class="keyword">null</span>) &#123;</span><br><span class="line">				<span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"No unique Validator found: &#123;"</span> +</span><br><span class="line">						selected + <span class="string">", "</span> + validator + <span class="string">"&#125;"</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			selected = validator;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> selected;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>以上这段代码，是遍历<code>WebMvcConfigurer</code>的子类，查找提供的validation；如果为null的话，会创建一个:<br>WebMvcConfigurationSupport.java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Validator <span class="title">mvcValidator</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	Validator validator = getValidator();</span><br><span class="line">	<span class="keyword">if</span> (validator == <span class="keyword">null</span>) &#123;</span><br><span class="line">		<span class="keyword">if</span> (ClassUtils.isPresent(<span class="string">"javax.validation.Validator"</span>, getClass().getClassLoader())) &#123;</span><br><span class="line">			Class&lt;?&gt; clazz;</span><br><span class="line">			<span class="keyword">try</span> &#123;</span><br><span class="line">				String className = <span class="string">"org.springframework.validation.beanvalidation.OptionalValidatorFactoryBean"</span>;</span><br><span class="line">				clazz = ClassUtils.forName(className, WebMvcConfigurationSupport.class.getClassLoader());</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">catch</span> (ClassNotFoundException ex) &#123;</span><br><span class="line">				<span class="keyword">throw</span> <span class="keyword">new</span> BeanInitializationException(<span class="string">"Could not find default validator class"</span>, ex);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">catch</span> (LinkageError ex) &#123;</span><br><span class="line">				<span class="keyword">throw</span> <span class="keyword">new</span> BeanInitializationException(<span class="string">"Could not load default validator class"</span>, ex);</span><br><span class="line">			&#125;</span><br><span class="line">			validator = (Validator) BeanUtils.instantiateClass(clazz);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			validator = <span class="keyword">new</span> NoOpValidator();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> validator;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>从上面这段代码来看，会创建一个<code>OptionalValidatorFactoryBean</code>的实例，它会调用父类的<code>LocalValidatorFactoryBean#afterPropertiesSet()</code>，根据代码可以发现其用到了<code>PlatformResourceBundleLocator</code>,而<code>AbstractMessageInterpolator.USER_VALIDATION_MESSAGES</code>指定了用户自定义的message bundle的默认值为<code>ValidationMessages</code>,<code>ResourceBundleMessageSource</code>中有代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">         String encoding = getDefaultEncoding();</span><br><span class="line"><span class="keyword">if</span> (encoding == <span class="keyword">null</span>) &#123;</span><br><span class="line">	encoding = <span class="string">"ISO-8859-1"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>说明其是用<code>ISO-8859-1</code>读取的文件，引起了乱码。</p>
+<h4 id="解决过程"><a href="#解决过程" class="headerlink" title="解决过程"></a>解决过程</h4><p>spring-boot会默认使用<code>ValidationMessages.properties</code>作为解析错误信息的文件。<br>首先我觉得应该是<code>properties</code>文件自身的编码问题，因为我使用的是<code>Intellij IDEA</code>开发,它默认的properties文件的编码是系统默认编码，在我的window上是<code>GBK</code>编码，所以首先修改了<code>properties</code>文件的编码类型，选择<code>File-&gt;setting-&gt;File Encoding</code>选择<code>properties</code>文件，修改编码为<code>UTF-8</code>但是仍未解决乱码问题。<br>后来大致阅读了部分源码才发现了问题所在:<br>WebConfigurerComposite.java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Validator <span class="title">getValidator</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	Validator selected = <span class="keyword">null</span>;</span><br><span class="line">	<span class="keyword">for</span> (WebMvcConfigurer configurer : <span class="keyword">this</span>.delegates) &#123;</span><br><span class="line">		Validator validator = configurer.getValidator();</span><br><span class="line">		<span class="keyword">if</span> (validator != <span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span> (selected != <span class="keyword">null</span>) &#123;</span><br><span class="line">				<span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"No unique Validator found: &#123;"</span> +</span><br><span class="line">						selected + <span class="string">", "</span> + validator + <span class="string">"&#125;"</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			selected = validator;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> selected;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>以上这段代码，是遍历<code>WebMvcConfigurer</code>的子类，查找提供的validation；如果为null的话，会创建一个:<br>WebMvcConfigurationSupport.java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Validator <span class="title">mvcValidator</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	Validator validator = getValidator();</span><br><span class="line">	<span class="keyword">if</span> (validator == <span class="keyword">null</span>) &#123;</span><br><span class="line">		<span class="keyword">if</span> (ClassUtils.isPresent(<span class="string">"javax.validation.Validator"</span>, getClass().getClassLoader())) &#123;</span><br><span class="line">			Class&lt;?&gt; clazz;</span><br><span class="line">			<span class="keyword">try</span> &#123;</span><br><span class="line">				String className = <span class="string">"org.springframework.validation.beanvalidation.OptionalValidatorFactoryBean"</span>;</span><br><span class="line">				clazz = ClassUtils.forName(className, WebMvcConfigurationSupport<span class="class">.<span class="keyword">class</span>.<span class="title">getClassLoader</span>())</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">catch</span> (ClassNotFoundException ex) &#123;</span><br><span class="line">				<span class="keyword">throw</span> <span class="keyword">new</span> BeanInitializationException(<span class="string">"Could not find default validator class"</span>, ex);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">catch</span> (LinkageError ex) &#123;</span><br><span class="line">				<span class="keyword">throw</span> <span class="keyword">new</span> BeanInitializationException(<span class="string">"Could not load default validator class"</span>, ex);</span><br><span class="line">			&#125;</span><br><span class="line">			validator = (Validator) BeanUtils.instantiateClass(clazz);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			validator = <span class="keyword">new</span> NoOpValidator();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> validator;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>从上面这段代码来看，会创建一个<code>OptionalValidatorFactoryBean</code>的实例，它会调用父类的<code>LocalValidatorFactoryBean#afterPropertiesSet()</code>，根据代码可以发现其用到了<code>PlatformResourceBundleLocator</code>,而<code>AbstractMessageInterpolator.USER_VALIDATION_MESSAGES</code>指定了用户自定义的message bundle的默认值为<code>ValidationMessages</code>,<code>ResourceBundleMessageSource</code>中有代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">         String encoding = getDefaultEncoding();</span><br><span class="line"><span class="keyword">if</span> (encoding == <span class="keyword">null</span>) &#123;</span><br><span class="line">	encoding = <span class="string">"ISO-8859-1"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>说明其是用<code>ISO-8859-1</code>读取的文件，引起了乱码。</p>
 <h4 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h4><ol>
 <li>转换中文为Unicode，如使用native2ascii</li>
 <li>只要重写<code>WebMvcConfigurer</code>中的<code>getValidatior()</code>就可以了：<br>继承<code>WebMvcConfigurerAdapter</code>，代码如下：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">  <span class="comment">/* *</span></span><br><span class="line"><span class="comment">    * spring boot 加载 properties的时候，默认使用 ISO 8859-1,导致中文乱码</span></span><br><span class="line"><span class="comment">    * 因此重写getValidator方法，使用utf8读取文件</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> Validator <span class="title">getValidator</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    LocalValidatorFactoryBean validatorFactory = <span class="keyword">new</span> LocalValidatorFactoryBean();</span><br><span class="line">    ResourceBundleMessageSource messageSource = <span class="keyword">new</span> ResourceBundleMessageSource();</span><br><span class="line">    messageSource.setBasename(<span class="string">"ValidationMessages"</span>);</span><br><span class="line">    messageSource.setDefaultEncoding(StandardCharsets.UTF_8.name());</span><br><span class="line">    validatorFactory.setValidationMessageSource(messageSource);</span><br><span class="line"><span class="comment">//    validatorFactory.setValidationProperties(PropertiesLoaderUtils.loadAllProperties(""));</span></span><br><span class="line">    <span class="keyword">return</span> validatorFactory;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<h4 id="application-properties"><a href="#application-properties" class="headerlink" title="application.properties"></a>application.properties</h4><p><code>application.properties</code>同样是使用ISO-8859-1加载的<br><code>ConfigFileApplicationListener.java</code>：<br>判断<code>spring.config.name</code>是否配置，如果没有默认application<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> Set&lt;String&gt; <span class="title">getSearchNames</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (<span class="keyword">this</span>.environment.containsProperty(CONFIG_NAME_PROPERTY)) &#123;</span><br><span class="line">		<span class="keyword">return</span> asResolvedSet(<span class="keyword">this</span>.environment.getProperty(CONFIG_NAME_PROPERTY),</span><br><span class="line">				<span class="keyword">null</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> asResolvedSet(ConfigFileApplicationListener.<span class="keyword">this</span>.names, DEFAULT_NAMES);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>在其<code>ConfigFileApplicationListener#loadIntoGroup</code>方法中，调用了<code>PropertySourcesLoader#load</code>，而这个方法中使用了<code>PropertySourceLoader</code>的两个子类<code>PropertiesPropertySourceLoader</code>,<code>YamlPropertySourceLoader</code>分别处理<code>properties</code>和<code>YAML</code>文件，<code>PropertiesPropertySourceLoader</code>调用了<code>PropertiesLoaderUtils.loadProperties(Resource)</code>,代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Load properties from the given resource (in ISO-8859-1 encoding).</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> resource the resource to load from</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> the populated Properties instance</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@throws</span> IOException if loading failed</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@see</span> #fillProperties(java.util.Properties, Resource)</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Properties <span class="title">loadProperties</span><span class="params">(Resource resource)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">	Properties props = <span class="keyword">new</span> Properties();</span><br><span class="line">	fillProperties(props, resource);</span><br><span class="line">	<span class="keyword">return</span> props;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>可以看出，<code>application.properties</code>也是使用<code>ISO-8859-1</code> 加载的。<br>所以这个文件里尽量放spring boot自身的配置，如果一定要写入中文，那么</p>
+<h4 id="application-properties"><a href="#application-properties" class="headerlink" title="application.properties"></a>application.properties</h4><p><code>application.properties</code>同样是使用ISO-8859-1加载的<br><code>ConfigFileApplicationListener.java</code>：<br>判断<code>spring.config.name</code>是否配置，如果没有默认application<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> Set&lt;String&gt; <span class="title">getSearchNames</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (<span class="keyword">this</span>.environment.containsProperty(CONFIG_NAME_PROPERTY)) &#123;</span><br><span class="line">		<span class="keyword">return</span> asResolvedSet(<span class="keyword">this</span>.environment.getProperty(CONFIG_NAME_PROPERTY),</span><br><span class="line">				<span class="keyword">null</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> asResolvedSet(ConfigFileApplicationListener.<span class="keyword">this</span>.names, DEFAULT_NAMES);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>在其<code>ConfigFileApplicationListener#loadIntoGroup</code>方法中，调用了<code>PropertySourcesLoader#load</code>，而这个方法中使用了<code>PropertySourceLoader</code>的两个子类<code>PropertiesPropertySourceLoader</code>,<code>YamlPropertySourceLoader</code>分别处理<code>properties</code>和<code>YAML</code>文件，<code>PropertiesPropertySourceLoader</code>调用了<code>PropertiesLoaderUtils.loadProperties(Resource)</code>,代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Load properties from the given resource (in ISO-8859-1 encoding).</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> resource the resource to load from</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> the populated Properties instance</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@throws</span> IOException if loading failed</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@see</span> #fillProperties(java.util.Properties, Resource)</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Properties <span class="title">loadProperties</span><span class="params">(Resource resource)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">	Properties props = <span class="keyword">new</span> Properties();</span><br><span class="line">	fillProperties(props, resource);</span><br><span class="line">	<span class="keyword">return</span> props;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>可以看出，<code>application.properties</code>也是使用<code>ISO-8859-1</code> 加载的。<br>所以这个文件里尽量放spring boot自身的配置，如果一定要写入中文，那么</p>
 <ol>
 <li>中文转<code>Unicode</code></li>
 <li>使用<code>YAML</code>格式文件</li>
 </ol>
-<p>使用@PropertySource引入的文件，可以直接设置编码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@PropertySource</span>(value = &#123;<span class="string">"$&#123;profile&#125;/datasource_config.properties"</span>, <span class="string">"$&#123;profile&#125;/impala.properties"</span>&#125;,</span><br><span class="line">    factory = EnvPropertySourceFactory.class,encoding = <span class="string">"UTF-8"</span>)</span><br></pre></td></tr></table></figure></p>
+<p>使用@PropertySource引入的文件，可以直接设置编码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@PropertySource</span>(value = &#123;<span class="string">"$&#123;profile&#125;/datasource_config.properties"</span>, <span class="string">"$&#123;profile&#125;/impala.properties"</span>&#125;,</span><br><span class="line">    factory = EnvPropertySourceFactory<span class="class">.<span class="keyword">class</span>,<span class="title">encoding</span> </span>= <span class="string">"UTF-8"</span>)</span><br></pre></td></tr></table></figure></p>
 
-      
     </div>
 
     
-
-    
-      
-    
-
     
     
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
         
-          
-        
-        <div class="post-tags">
-          
-            <a href="/tags/spring/" rel="tag"># spring</a>
-          
-        </div>
       
 
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
+      <footer class="post-footer">
+          
             
-              <a href="/2016/01/18/simple-gradle-learn/" rel="next" title="gradle的简单使用">
-                <i class="fa fa-chevron-left"></i> gradle的简单使用
-              </a>
+          
+          <div class="post-tags">
+            
+              <a href="/tags/spring/" rel="tag"># spring</a>
             
           </div>
+        
 
-          <span class="post-nav-divider"></span>
+        
 
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/02/23/use-expect-to-deploy-war/" rel="prev" title="使用 expect 脚本进行自动化部署">
-                使用 expect 脚本进行自动化部署 <i class="fa fa-chevron-right"></i>
-              </a>
-            
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2016/01/18/simple-gradle-learn/" rel="next" title="gradle的简单使用">
+                  <i class="fa fa-chevron-left"></i> gradle的简单使用
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2016/02/23/use-expect-to-deploy-war/" rel="prev" title="使用 expect 脚本进行自动化部署">
+                  使用 expect 脚本进行自动化部署 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
           </div>
-        </div>
-      
-
-      
-      
-    </footer>
+        
+      </footer>
+    
   </div>
   
   
   
   </article>
 
-
   </div>
 
 
           </div>
           
-
+    
+    
+  <div class="comments" id="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC8zMzMwNS85ODYy"></div>
+  </div>
   
-    <div class="comments" id="comments">
-      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMzMwNS85ODYy"></div>
-    </div>
-
   
-
-
 
         </div>
-        
           
   
   <div class="sidebar-toggle">
@@ -559,151 +382,70 @@
     </div>
   </div>
 
-  <aside id="sidebar" class="sidebar">
+  <aside class="sidebar">
     <div class="sidebar-inner">
-
+        
+        
+        
+        
       
 
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解决过程"><span class="nav-number">2.</span> <span class="nav-text">解决过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解决办法"><span class="nav-number">3.</span> <span class="nav-text">解决办法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#application-properties"><span class="nav-number">4.</span> <span class="nav-text">application.properties</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
 
       <div class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  
-    <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="tubei">
-  
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/uploads/avatar.png"
+      alt="tubei">
   <p class="site-author-name" itemprop="name">tubei</p>
-  <div class="site-description motion-element" itemprop="description">一只程序员的小屋</div>
+  <div class="site-description" itemprop="description">一只程序员的小屋</div>
 </div>
-
-
   <nav class="site-state motion-element">
-    
       <div class="site-state-item site-state-posts">
         
-          <a href="/archives/">
+          <a href="/archives/%20%7C%7C%20archive">
         
-          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
-    
-
     
       
       
       <div class="site-state-item site-state-categories">
         
           
-            <a href="/categories/">
+            <a href="/categories/%20%7C%7C%20th">
           
         
-        
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">categories</span>
         </a>
       </div>
-    
-
     
       
       
       <div class="site-state-item site-state-tags">
         
           
-            <a href="/tags/">
+            <a href="/tags/%20%7C%7C%20tags">
           
         
-        
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">tags</span>
         </a>
       </div>
@@ -712,79 +454,33 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-          
-          
-        </div>
       </div>
-
-      
-      <!--noindex-->
-        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-            
-            
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解决过程"><span class="nav-number">2.</span> <span class="nav-text">解决过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解决办法"><span class="nav-number">3.</span> <span class="nav-text">解决办法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#application-properties"><span class="nav-number">4.</span> <span class="nav-text">application.properties</span></a></li></ol></div>
-            
-
-          </div>
-        </div>
-      <!--/noindex-->
-      
-
-      
 
     </div>
   </aside>
   <div id="sidebar-dimmer"></div>
 
 
-        
       </div>
     </main>
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">tubei</span>
-
-  
-
-  
 </div>
-
-
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
-
-
-
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.1</div>
   <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.2.0</div>
-
-
-
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.4.0</div>
 
         
+
+
+
+
 
 
 
@@ -796,106 +492,39 @@
         
       </div>
     </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
-    
-
-    
-
-    
-
   </div>
 
   
 
-<script>
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-
-
-
-
-
-
-
-
-
-  
-  <script src="/lib/jquery/index.js?v=3.4.1"></script>
-
-  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
   <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
   <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
 
+<script src="/js/utils.js?v=7.4.0.js"></script>
+
+<script src="/js/motion.js?v=7.4.0.js"></script>
 
 
-
-  <script src="/js/utils.js?v=7.2.0"></script>
-
-  <script src="/js/motion.js?v=7.2.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0.js"></script>
 
 
+<script src="/js/next-boot.js?v=7.4.0.js"></script>
 
-  
-  
-
-
-  <script src="/js/affix.js?v=7.2.0"></script>
-
-  <script src="/js/schemes/pisces.js?v=7.2.0"></script>
 
 
 
   
-  <script src="/js/scrollspy.js?v=7.2.0"></script>
-<script src="/js/post-details.js?v=7.2.0"></script>
 
 
 
-  <script src="/js/next-boot.js?v=7.2.0"></script>
-
-  
-
-  
-
-  
 
 
-  
-  
 
-  
-  
 
-  
+
+
+
 
 
 
@@ -908,12 +537,16 @@
 
 
   
-    
 
+  
+
+  
+
+  
 
 <script>
   window.livereOptions = {
-    refer: '2016/02/19/spring-boot-properties-Chinese-garbled/'
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
   };
   (function(d, s) {
     var j, e = d.getElementsByTagName(s)[0];
@@ -924,50 +557,6 @@
     e.parentNode.insertBefore(j, e);
   })(document, 'script');
 </script>
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script>
-// GET RESPONSIVE HEIGHT PASSED FROM IFRAME
-
-window.addEventListener("message", function(e) {
-  var data = e.data;
-  if ((typeof data === 'string') && (data.indexOf('ciu_embed') > -1)) {
-    var featureID = data.split(':')[1];
-    var height = data.split(':')[2];
-    $(`iframe[data-feature=${featureID}]`).height(parseInt(height) + 30);
-  }
-}, false);
-</script>
-
-
-
-
-
-
-
-
-  
 
 </body>
 </html>

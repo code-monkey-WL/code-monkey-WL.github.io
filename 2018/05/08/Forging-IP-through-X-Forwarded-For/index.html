@@ -4,132 +4,84 @@
 
 
 
-
-
-
-
-
-
-
-  
-
-
-<html class="theme-next pisces use-motion" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.8.0">
+<html lang="zh-Hans">
+<head>
   <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
 
-
-
-
-
-
-
-
-
-
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
-
-
-
-
-
-
-<link rel="stylesheet" href="/css/main.css?v=7.2.0">
-
-
-
-
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
 
 
 <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
 
 
-
-
-
-
-
-
-<script id="hexo.configurations">
+<script id="hexo-configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
     scheme: 'Pisces',
-    version: '7.2.0',
+    version: '7.4.0',
+    exturl: false,
     sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
-    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
     copycode: {"enable":true,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"save":"auto","color":"#222"},
     fancybox: false,
     mediumzoom: false,
     lazyload: false,
     pangu: false,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     algolia: {
-      applicationID: '',
+      appID: '',
       apiKey: '',
       indexName: '',
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     translation: {
       copy_button: 'Copy',
       copy_success: 'Copied',
       copy_failure: 'Copy failed'
-    }
+    },
+    sidebarPadding: 40
   };
 </script>
 
   <meta name="description" content="最近接手的一个项目在某天早上收到了一条来自公司安全组的漏洞警告：用户可以伪造请求头来伪造 IP，绕过 IP 相关的限制策略。">
-<meta name="keywords" content="安全">
 <meta property="og:type" content="article">
 <meta property="og:title" content="X-Forwarded-For 伪造 IP 漏洞">
 <meta property="og:url" content="http://yoursite.com/2018/05/08/Forging-IP-through-X-Forwarded-For/index.html">
 <meta property="og:site_name" content="tubei">
 <meta property="og:description" content="最近接手的一个项目在某天早上收到了一条来自公司安全组的漏洞警告：用户可以伪造请求头来伪造 IP，绕过 IP 相关的限制策略。">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-09T01:54:22.445Z">
+<meta property="article:published_time" content="2018-05-08T09:00:57.000Z">
+<meta property="article:modified_time" content="2020-07-07T12:09:07.998Z">
+<meta property="article:author" content="tubei">
+<meta property="article:tag" content="安全">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="X-Forwarded-For 伪造 IP 漏洞">
-<meta name="twitter:description" content="最近接手的一个项目在某天早上收到了一条来自公司安全组的漏洞警告：用户可以伪造请求头来伪造 IP，绕过 IP 相关的限制策略。">
-
-
-
-
-
-  
-  
   <link rel="canonical" href="http://yoursite.com/2018/05/08/Forging-IP-through-X-Forwarded-For/">
 
 
-
-<script id="page.configurations">
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
   };
 </script>
 
-  
   <title>X-Forwarded-For 伪造 IP 漏洞 | tubei</title>
   
-
-
-
-
 
 
   <script>
@@ -147,10 +99,8 @@
 
 
 
-
   <noscript>
   <style>
-  .use-motion .motion-element,
   .use-motion .brand,
   .use-motion .menu-item,
   .sidebar-inner,
@@ -159,7 +109,7 @@
   .use-motion .comments,
   .use-motion .post-header,
   .use-motion .post-body,
-  .use-motion .collection-title { opacity: initial; }
+  .use-motion .collection-header { opacity: initial; }
 
   .use-motion .logo,
   .use-motion .site-title,
@@ -176,33 +126,22 @@
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container use-motion">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
+      <div class="header-inner"><div class="site-brand-container">
   <div class="site-meta">
-    
 
-    <div class="custom-logo-site-title">
+    <div>
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">tubei</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
-    
-      
         <p class="site-subtitle">我准备好了</p>
       
-    
-    
   </div>
 
   <div class="site-nav-toggle">
@@ -215,136 +154,91 @@
 </div>
 
 
-
 <nav class="site-nav">
   
-    <ul id="menu" class="menu">
+  <ul id="menu" class="menu">
+      
+      
       
         
-        
-        
-          
-          <li class="menu-item menu-item-home">
-
-    
-    
+        <li class="menu-item menu-item-home">
       
-    
-
     
 
     <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
 
   </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-archives">
-
-    
-    
       
-    
-
-    
-
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
-
-  </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-tags">
-
-    
-    
       
-    
-
+      
+        
+        <li class="menu-item menu-item-tags">
+      
     
 
     <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
 
   </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-categories">
-
-    
-    
       
-    
-
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
     
 
     <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
 
   </li>
+      
+      
+      
         
-        
-        
-          
-          <li class="menu-item menu-item-commonweal">
-
-    
-    
+        <li class="menu-item menu-item-archives">
       
     
 
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-commonweal">
+      
     
 
     <a href="/404/" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>Commonweal 404</a>
 
   </li>
+  </ul>
 
-      
-      
-    </ul>
-  
-
-  
-
-  
 </nav>
-
-
-
 </div>
     </header>
 
     
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
 
 
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
-          
             
 
-          
           <div id="content" class="content">
             
 
   <div id="posts" class="posts-expand">
-    
-
-  
-
+      <article itemscope itemtype="http://schema.org/Article">
   
   
   
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
+  <div class="post-block post">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/08/Forging-IP-through-X-Forwarded-For/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -356,33 +250,18 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="tubei">
     </span>
-
-    
       <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">X-Forwarded-For 伪造 IP 漏洞
 
-        
-        
-          <h1 class="post-title" itemprop="name headline">X-Forwarded-For 伪造 IP 漏洞
-
-              
-            
-          </h1>
-        
+          
+        </h1>
 
         <div class="post-meta">
-
-          
-          
-          
-
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
+              <span class="post-meta-item-text">Posted on</span>
 
               
                 
@@ -391,17 +270,11 @@
               <time title="Created: 2018-05-08 17:00:57" itemprop="dateCreated datePublished" datetime="2018-05-08T17:00:57+08:00">2018-05-08</time>
             </span>
           
-
-          
-
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
+              <span class="post-meta-item-text">In</span>
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a></span>
 
@@ -412,27 +285,9 @@
           
 
           
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          <br>
-          
-
-          
-
-          
 
         </div>
       </header>
-    
 
     
     
@@ -440,122 +295,93 @@
     <div class="post-body" itemprop="articleBody">
 
       
-      
-
-      
         <p> 最近接手的一个项目在某天早上收到了一条来自公司安全组的漏洞警告：用户可以伪造请求头来伪造 IP，绕过 IP 相关的限制策略。<br><a id="more"></a></p>
-<h4 id="漏洞原因"><a href="#漏洞原因" class="headerlink" title="漏洞原因"></a>漏洞原因</h4><p>为了项目安全，针对同一个 IP 的频繁访问有一定的策略限制，那么如何获取 IP 呢？</p>
-<p>在 Java 项目获取客户端 IP ，可以通过 <code>HttpServletRequest#getRemoteAddr</code> 方法获取，这个方法可以直接获取到连接服务器的 client 的 IP，因为 HTTP 在传输层是 TCP 协议，它获取的实际是 TCP 层连接的 client 端的 IP。但是在项目有代理服务器的时候，这个获取到的是代理服务器的 IP 地址。有一段常用的获取 IP 的代码如下，我的这个项目里也使用了：</p>
+<h4 id="漏洞原因"><a href="#漏洞原因" class="headerlink" title="漏洞原因"></a>漏洞原因</h4><p>这个项目为了安全，针对同一个 IP 的频繁访问有一定的策略限制，因此如果用户可以伪装 IP，就能绕过这个策略限制。<br>在 Java 项目获取客户端 IP ，可以通过 <code>HttpServletRequest#getRemoteAddr</code> 方法获取，这个方法可以直接获取到连接服务器的 client 的 IP，因为 HTTP 在传输层是 TCP 协议，它获取的实际是 TCP 层连接的 client 端的 IP。但是在项目一般是有代理服务器来做负载均衡的，这个时候获取到的是代理服务器的 IP 地址。因此需要另一种获取用户 IP 的方法，有一段常用的获取 IP 的代码如下，我的这个项目里也使用了：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getIp</span><span class="params">(HttpServletRequest request)</span> </span>&#123;</span><br><span class="line">  String xff = request.getHeader(<span class="string">"X-Forwarded-For"</span>);</span><br><span class="line">  <span class="keyword">if</span> (StringUtils.isBlank(xff)) &#123;</span><br><span class="line">    <span class="keyword">return</span> request.getRemoteAddr();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> xff.contains(<span class="string">","</span>) ? xff.split(<span class="string">","</span>)[<span class="number">0</span>] : xff;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这段代码相信大家都很熟悉，那么漏洞在哪里呢？要想知道哪里有漏洞，首先要知道 <code>X-Forwarded-For</code> 这个请求头的作用。</p>
+<p>这段代码相信大家都很熟悉，在网上搜一下，基本上都是这么写的，那么它的漏洞在哪里呢？要想知道哪里有漏洞，首先要知道 <code>X-Forwarded-For</code> 这个请求头的作用。</p>
 <h5 id="X-Forwarded-For"><a href="#X-Forwarded-For" class="headerlink" title="X-Forwarded-For"></a>X-Forwarded-For</h5><p>这个请求头并不在 Http 的标准定义中，它最早是由 Squid 这个代理服务器的开发人员引入的，后来成为了事实上的标准，各大 HTTP 代理、负载均衡等转发服务广泛使用，后来被写入 <a href="http://tools.ietf.org/html/rfc7239" target="_blank" rel="noopener">RFC 7239</a>（Forwarded HTTP Extension）标准之中。</p>
 <p>它主要用来追踪请求的来源，它的格式如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X-Forwarded-For: client1, proxy1, proxy2, ...</span><br></pre></td></tr></table></figure>
 <p>最左边的是客户端的IP，每经过一个 proxy，就把对应的 IP 追加到后面，值之间用 <em>“, “(逗号+空格)</em> 隔开，请求刚从 client1 中发出时，XFF 是空的，请求被发往 proxy1；通过 proxy1 的时候，client1 被添加到XFF中，之后请求被发往 proxy2; 通过 proxy2 的时候，proxy1 被添加到XFF中，之后请求被发往 proxy3 ；通过proxy3时，proxy2被添加到XFF中，之后请求的的去向不明，如果proxy3不是请求终点，请求会被继续转发。</p>
-<p>在 nginx 中这么配置来支持 <code>X-Forwarded-For</code>：</p>
+<p>在 nginx 中一般这么配置来支持 <code>X-Forwarded-For</code>：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#$proxy_add_x_forwarded_for会将和Nginx直接连接的客户端IP追加在请求原有X-Forwarded-For值的右边。</span></span><br><span class="line">proxy_set_header X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br></pre></td></tr></table></figure>
-<p>这么看我们之前的代码应该是可以正常运行的，但是要注意的是：这个请求头是可以被用户伪造的，由于它是以追加的形式填充的，用户可以很方便的通过 Postman、curl 等工具伪造 <code>X-Forwarded-For</code> ，由于后续每层代理只会追加而不会覆盖，那么我们获取到的就是被伪造的 IP 了。<br>假如用户构造了如下的 XFF：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X-Forwarded-For: 1.1.1.1</span><br></pre></td></tr></table></figure></p>
-<p>服务器获取到的就是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X-Forwarded-For: 1.1.1.1, client1, proxy1, ...</span><br></pre></td></tr></table></figure></p>
-<p>那上面的代码获取到的就是用户伪造的 IP ，这样就绕开了 IP 的策略限制，漏洞就这么形成了。</p>
-<h4 id="漏洞修复"><a href="#漏洞修复" class="headerlink" title="漏洞修复"></a>漏洞修复</h4><p>在 nginx 中可以通过 nginx 的内置变量 <code>$remote_addr</code> 获取到与这个 nginx 连接的 client 的 IP 信息，那么可以在最外层的 nginx 代理上配置：</p>
+<p>这么看我们之前的代码应该是可以正常运行的，但是要注意的是：这个请求头是可以被用户伪造的，由于它是以追加的形式填充的，用户可以很方便的通过 Postman、curl 等工具伪造 <code>X-Forwarded-For</code> ，由于后续每层代理只会追加而不会覆盖，那么我们获取到的就是被伪造的 IP 了。<br>假如用户构造了如下的 XFF：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X-Forwarded-For: 1.1.1.1</span><br></pre></td></tr></table></figure><br>服务器获取到的就是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X-Forwarded-For: 1.1.1.1, client1, proxy1, ...</span><br></pre></td></tr></table></figure><br>那上面的代码获取到的就是用户伪造的 IP ，这样就绕开了 IP 的策略限制，漏洞就这么形成了。</p>
+<h4 id="漏洞修复"><a href="#漏洞修复" class="headerlink" title="漏洞修复"></a>漏洞修复</h4><p>在 nginx 中可以通过 nginx 的内置变量 <code>$remote_addr</code> 获取到与这个 nginx 建立 tcp 连接的 client 的 IP 信息的，那么可以在最外层的 nginx 代理上配置：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxy_set_header X-Forwarded-For <span class="variable">$remote_addr</span></span><br></pre></td></tr></table></figure>
 <p>这样用户即使伪造了 XFF 头，也会被覆盖掉。需要注意的是，如果有多层的 nginx 代理，只需要在直接对外访问的Nginx上配置<code>X-Forwarded-For</code>为<code>$remote_addr</code>，内部层的Nginx还是要配置为<code>$proxy_add_x_forwarded_for</code>。</p>
 <p><strong>缺点</strong>：如果用户使用了代理(vpn 等)，获取到的是代理的 IP 地址。而之前存在于 XFF 的代理信息都会被覆盖掉。</p>
 <h5 id="X-Real-IP"><a href="#X-Real-IP" class="headerlink" title="X-Real-IP"></a>X-Real-IP</h5><p>一般我们的 nginx 都会如下配置：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">proxy_set_header Host <span class="variable">$host</span>;</span><br><span class="line">proxy_set_header X-Real-IP <span class="variable">$remote_addr</span>;</span><br><span class="line">proxy_set_header X-Real-PORT <span class="variable">$remote_port</span>;</span><br><span class="line">proxy_set_header X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br></pre></td></tr></table></figure>
 <p>通过配置请求头中的 <code>X-Real-IP</code> ，那么就可以通过<code>request.getHeader(&quot;X-Real-IP&quot;)</code> 获取 client 的 IP 地址，这个同样只要在最外层的 nginx 代理上配置。这里 <code>X-Real-IP</code> 是个自定义的请求头，并不在标准中，也可以改成别的名字。</p>
-<p>这里我获取了 <code>X-Real-IP</code> 来作为 IP 地址，推荐与安全有关的场景，只使用 X-Real-IP；在与安全无关的场景，例如通过 IP 提供城市服务、天气信息、旅游指南等，可以从 X-Forwarded-For 靠前的位置获取 IP，但是需要校验 IP 格式合法性。</p>
+<p>这里我获取了 <code>X-Real-IP</code> 来作为 IP 地址，修复了漏洞。</p>
 <h5 id="realip-module"><a href="#realip-module" class="headerlink" title="realip module"></a>realip module</h5><p>nginx 也提供了 realip 模块（需要 —with-http_realip_module 编译开启）：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">set_real_ip_from  192.168.1.0/24;</span><br><span class="line">set_real_ip_from  xxxx.xxx.x.x;</span><br><span class="line">real_ip_header    X-Forwarded-For;<span class="comment">#</span></span><br><span class="line">real_ip_recursive on;</span><br></pre></td></tr></table></figure>
 <p>上面的配置 nginx 会递归的从 X-Forwarded-For 的值中从右到左去除可信 IP（set_real_ip_from 里的IP），碰到第一个不可信 IP 作为用户 IP。</p>
+<h5 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h5><p>虽然 X-Forwarded-For 可以被伪造，但是它作为 http 规范中的 header，用处还是非常大的，一般的代理会在请求的时候将用户的真实 ip 加在 X-Forwarded-For 中，在与安全无关的场景中，例如通过 IP 提供城市服务、天气信息、旅游指南等，可以从 X-Forwarded-For 靠前的位置获取 IP，这样用户即使使用了代理，还是能提供相应的服务，这里需要校验 IP 格式合法性。在与安全有关的场景，比如黑名单等逻辑，还是使用 X-Real-IP 进行标识，当然这也不是万能的，如果用户使用了 ip 代理池，就无法防范了，这时候就需要其他手段多管齐下了。</p>
 
-      
     </div>
 
     
-
-    
-      
-    
-
     
     
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
         
-          
-        
-        <div class="post-tags">
-          
-            <a href="/tags/安全/" rel="tag"># 安全</a>
-          
-        </div>
       
 
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
+      <footer class="post-footer">
+          
             
-              <a href="/2017/10/19/spring-boot-request-log/" rel="next" title="spring boot 打印请求日志">
-                <i class="fa fa-chevron-left"></i> spring boot 打印请求日志
-              </a>
+          
+          <div class="post-tags">
+            
+              <a href="/tags/%E5%AE%89%E5%85%A8/" rel="tag"># 安全</a>
             
           </div>
+        
 
-          <span class="post-nav-divider"></span>
+        
 
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/08/12/sso-auth-with-jwt/" rel="prev" title="SSO 使用 jwt 实现跨域认证">
-                SSO 使用 jwt 实现跨域认证 <i class="fa fa-chevron-right"></i>
-              </a>
-            
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2017/10/19/spring-boot-request-log/" rel="next" title="spring boot 打印请求日志">
+                  <i class="fa fa-chevron-left"></i> spring boot 打印请求日志
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2018/07/11/develop-project-with-kotlin/" rel="prev" title="使用 kotlin 开发项目的体验">
+                  使用 kotlin 开发项目的体验 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
           </div>
-        </div>
-      
-
-      
-      
-    </footer>
+        
+      </footer>
+    
   </div>
   
   
   
   </article>
 
-
   </div>
 
 
           </div>
           
-
+    
+    
+  <div class="comments" id="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC8zMzMwNS85ODYy"></div>
+  </div>
   
-    <div class="comments" id="comments">
-      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMzMwNS85ODYy"></div>
-    </div>
-
   
-
-
 
         </div>
-        
           
   
   <div class="sidebar-toggle">
@@ -566,151 +392,70 @@
     </div>
   </div>
 
-  <aside id="sidebar" class="sidebar">
+  <aside class="sidebar">
     <div class="sidebar-inner">
-
+        
+        
+        
+        
       
 
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#漏洞原因"><span class="nav-number">1.</span> <span class="nav-text">漏洞原因</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#X-Forwarded-For"><span class="nav-number">1.1.</span> <span class="nav-text">X-Forwarded-For</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#漏洞修复"><span class="nav-number">2.</span> <span class="nav-text">漏洞修复</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#X-Real-IP"><span class="nav-number">2.1.</span> <span class="nav-text">X-Real-IP</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#realip-module"><span class="nav-number">2.2.</span> <span class="nav-text">realip module</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#总结"><span class="nav-number">2.3.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
 
       <div class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  
-    <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="tubei">
-  
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/uploads/avatar.png"
+      alt="tubei">
   <p class="site-author-name" itemprop="name">tubei</p>
-  <div class="site-description motion-element" itemprop="description">一只程序员的小屋</div>
+  <div class="site-description" itemprop="description">一只程序员的小屋</div>
 </div>
-
-
   <nav class="site-state motion-element">
-    
       <div class="site-state-item site-state-posts">
         
-          <a href="/archives/">
+          <a href="/archives/%20%7C%7C%20archive">
         
-          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
-    
-
     
       
       
       <div class="site-state-item site-state-categories">
         
           
-            <a href="/categories/">
+            <a href="/categories/%20%7C%7C%20th">
           
         
-        
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">categories</span>
         </a>
       </div>
-    
-
     
       
       
       <div class="site-state-item site-state-tags">
         
           
-            <a href="/tags/">
+            <a href="/tags/%20%7C%7C%20tags">
           
         
-        
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">tags</span>
         </a>
       </div>
@@ -719,79 +464,33 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-          
-          
-        </div>
       </div>
-
-      
-      <!--noindex-->
-        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-            
-            
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#漏洞原因"><span class="nav-number">1.</span> <span class="nav-text">漏洞原因</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#X-Forwarded-For"><span class="nav-number">1.1.</span> <span class="nav-text">X-Forwarded-For</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#漏洞修复"><span class="nav-number">2.</span> <span class="nav-text">漏洞修复</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#X-Real-IP"><span class="nav-number">2.1.</span> <span class="nav-text">X-Real-IP</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#realip-module"><span class="nav-number">2.2.</span> <span class="nav-text">realip module</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </div>
-      <!--/noindex-->
-      
-
-      
 
     </div>
   </aside>
   <div id="sidebar-dimmer"></div>
 
 
-        
       </div>
     </main>
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">tubei</span>
-
-  
-
-  
 </div>
-
-
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
-
-
-
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.1</div>
   <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.2.0</div>
-
-
-
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.4.0</div>
 
         
+
+
+
+
 
 
 
@@ -803,106 +502,39 @@
         
       </div>
     </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
-    
-
-    
-
-    
-
   </div>
 
   
 
-<script>
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-
-
-
-
-
-
-
-
-
-  
-  <script src="/lib/jquery/index.js?v=3.4.1"></script>
-
-  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
   <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
   <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
 
+<script src="/js/utils.js?v=7.4.0.js"></script>
+
+<script src="/js/motion.js?v=7.4.0.js"></script>
 
 
-
-  <script src="/js/utils.js?v=7.2.0"></script>
-
-  <script src="/js/motion.js?v=7.2.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0.js"></script>
 
 
+<script src="/js/next-boot.js?v=7.4.0.js"></script>
 
-  
-  
-
-
-  <script src="/js/affix.js?v=7.2.0"></script>
-
-  <script src="/js/schemes/pisces.js?v=7.2.0"></script>
 
 
 
   
-  <script src="/js/scrollspy.js?v=7.2.0"></script>
-<script src="/js/post-details.js?v=7.2.0"></script>
 
 
 
-  <script src="/js/next-boot.js?v=7.2.0"></script>
-
-  
-
-  
-
-  
 
 
-  
-  
 
-  
-  
 
-  
+
+
+
 
 
 
@@ -915,12 +547,16 @@
 
 
   
-    
 
+  
+
+  
+
+  
 
 <script>
   window.livereOptions = {
-    refer: '2018/05/08/Forging-IP-through-X-Forwarded-For/'
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
   };
   (function(d, s) {
     var j, e = d.getElementsByTagName(s)[0];
@@ -931,50 +567,6 @@
     e.parentNode.insertBefore(j, e);
   })(document, 'script');
 </script>
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script>
-// GET RESPONSIVE HEIGHT PASSED FROM IFRAME
-
-window.addEventListener("message", function(e) {
-  var data = e.data;
-  if ((typeof data === 'string') && (data.indexOf('ciu_embed') > -1)) {
-    var featureID = data.split(':')[1];
-    var height = data.split(':')[2];
-    $(`iframe[data-feature=${featureID}]`).height(parseInt(height) + 30);
-  }
-}, false);
-</script>
-
-
-
-
-
-
-
-
-  
 
 </body>
 </html>

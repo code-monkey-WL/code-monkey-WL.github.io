@@ -4,132 +4,84 @@
 
 
 
-
-
-
-
-
-
-
-  
-
-
-<html class="theme-next pisces use-motion" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.8.0">
+<html lang="zh-Hans">
+<head>
   <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
 
-
-
-
-
-
-
-
-
-
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
-
-
-
-
-
-
-<link rel="stylesheet" href="/css/main.css?v=7.2.0">
-
-
-
-
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
 
 
 <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
 
 
-
-
-
-
-
-
-<script id="hexo.configurations">
+<script id="hexo-configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
     scheme: 'Pisces',
-    version: '7.2.0',
+    version: '7.4.0',
+    exturl: false,
     sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
-    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
     copycode: {"enable":true,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"save":"auto","color":"#222"},
     fancybox: false,
     mediumzoom: false,
     lazyload: false,
     pangu: false,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     algolia: {
-      applicationID: '',
+      appID: '',
       apiKey: '',
       indexName: '',
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     translation: {
       copy_button: 'Copy',
       copy_success: 'Copied',
       copy_failure: 'Copy failed'
-    }
+    },
+    sidebarPadding: 40
   };
 </script>
 
-  <meta name="description" content="最近负责部门一个比较老的项目，这个项目为各个业务线提供服务，它使用了一个 redis 集群来缓存一些用户数据，可能是因为机器服役太久了？其中一台 redis 服务器一天晚上挂掉了，而由于历史遗留问题，这个 redis 既没有做主从，也没有过备份，这就导致了整个内存中的数据都挂掉了。这对业务线产生了一部分影响，为了降低影响，业务线的同事从之前的历史日志里回溯了 8G 的历史数据，希望我把这些数据重新">
-<meta name="keywords" content="文件">
+  <meta name="description" content="最近负责部门一个比较老的项目，这个项目为各个业务线提供服务，它使用了一个 redis 集群来缓存一些用户数据，使用的是自建的 redis 服务，可能是因为机器服役太久了吧，其中一台 redis 服务器一天晚上挂掉了，而由于历史遗留问题，这个 redis 既没有做主从，也没有过备份，这就导致了整个内存中的数据都挂掉了。这对业务线产生了一部分影响，为了降低影响，业务线的同事从之前的历史日志里回溯了 8">
 <meta property="og:type" content="article">
 <meta property="og:title" content="记一次大文件的处理">
 <meta property="og:url" content="http://yoursite.com/2018/12/17/large-file-handle-record/index.html">
 <meta property="og:site_name" content="tubei">
-<meta property="og:description" content="最近负责部门一个比较老的项目，这个项目为各个业务线提供服务，它使用了一个 redis 集群来缓存一些用户数据，可能是因为机器服役太久了？其中一台 redis 服务器一天晚上挂掉了，而由于历史遗留问题，这个 redis 既没有做主从，也没有过备份，这就导致了整个内存中的数据都挂掉了。这对业务线产生了一部分影响，为了降低影响，业务线的同事从之前的历史日志里回溯了 8G 的历史数据，希望我把这些数据重新">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-11T06:39:31.207Z">
+<meta property="og:description" content="最近负责部门一个比较老的项目，这个项目为各个业务线提供服务，它使用了一个 redis 集群来缓存一些用户数据，使用的是自建的 redis 服务，可能是因为机器服役太久了吧，其中一台 redis 服务器一天晚上挂掉了，而由于历史遗留问题，这个 redis 既没有做主从，也没有过备份，这就导致了整个内存中的数据都挂掉了。这对业务线产生了一部分影响，为了降低影响，业务线的同事从之前的历史日志里回溯了 8">
+<meta property="article:published_time" content="2018-12-17T10:35:57.000Z">
+<meta property="article:modified_time" content="2020-07-07T12:12:26.360Z">
+<meta property="article:author" content="tubei">
+<meta property="article:tag" content="文件">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="记一次大文件的处理">
-<meta name="twitter:description" content="最近负责部门一个比较老的项目，这个项目为各个业务线提供服务，它使用了一个 redis 集群来缓存一些用户数据，可能是因为机器服役太久了？其中一台 redis 服务器一天晚上挂掉了，而由于历史遗留问题，这个 redis 既没有做主从，也没有过备份，这就导致了整个内存中的数据都挂掉了。这对业务线产生了一部分影响，为了降低影响，业务线的同事从之前的历史日志里回溯了 8G 的历史数据，希望我把这些数据重新">
-
-
-
-
-
-  
-  
   <link rel="canonical" href="http://yoursite.com/2018/12/17/large-file-handle-record/">
 
 
-
-<script id="page.configurations">
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
   };
 </script>
 
-  
   <title>记一次大文件的处理 | tubei</title>
   
-
-
-
-
 
 
   <script>
@@ -147,10 +99,8 @@
 
 
 
-
   <noscript>
   <style>
-  .use-motion .motion-element,
   .use-motion .brand,
   .use-motion .menu-item,
   .sidebar-inner,
@@ -159,7 +109,7 @@
   .use-motion .comments,
   .use-motion .post-header,
   .use-motion .post-body,
-  .use-motion .collection-title { opacity: initial; }
+  .use-motion .collection-header { opacity: initial; }
 
   .use-motion .logo,
   .use-motion .site-title,
@@ -176,33 +126,22 @@
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container use-motion">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
+      <div class="header-inner"><div class="site-brand-container">
   <div class="site-meta">
-    
 
-    <div class="custom-logo-site-title">
+    <div>
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">tubei</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
-    
-      
         <p class="site-subtitle">我准备好了</p>
       
-    
-    
   </div>
 
   <div class="site-nav-toggle">
@@ -215,136 +154,91 @@
 </div>
 
 
-
 <nav class="site-nav">
   
-    <ul id="menu" class="menu">
+  <ul id="menu" class="menu">
+      
+      
       
         
-        
-        
-          
-          <li class="menu-item menu-item-home">
-
-    
-    
+        <li class="menu-item menu-item-home">
       
-    
-
     
 
     <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
 
   </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-archives">
-
-    
-    
       
-    
-
-    
-
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
-
-  </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-tags">
-
-    
-    
       
-    
-
+      
+        
+        <li class="menu-item menu-item-tags">
+      
     
 
     <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
 
   </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-categories">
-
-    
-    
       
-    
-
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
     
 
     <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
 
   </li>
+      
+      
+      
         
-        
-        
-          
-          <li class="menu-item menu-item-commonweal">
-
-    
-    
+        <li class="menu-item menu-item-archives">
       
     
 
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-commonweal">
+      
     
 
     <a href="/404/" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>Commonweal 404</a>
 
   </li>
+  </ul>
 
-      
-      
-    </ul>
-  
-
-  
-
-  
 </nav>
-
-
-
 </div>
     </header>
 
     
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
 
 
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
-          
             
 
-          
           <div id="content" class="content">
             
 
   <div id="posts" class="posts-expand">
-    
-
-  
-
+      <article itemscope itemtype="http://schema.org/Article">
   
   
   
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
+  <div class="post-block post">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/17/large-file-handle-record/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -356,33 +250,18 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="tubei">
     </span>
-
-    
       <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">记一次大文件的处理
 
-        
-        
-          <h1 class="post-title" itemprop="name headline">记一次大文件的处理
-
-              
-            
-          </h1>
-        
+          
+        </h1>
 
         <div class="post-meta">
-
-          
-          
-          
-
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
+              <span class="post-meta-item-text">Posted on</span>
 
               
                 
@@ -391,17 +270,11 @@
               <time title="Created: 2018-12-17 18:35:57" itemprop="dateCreated datePublished" datetime="2018-12-17T18:35:57+08:00">2018-12-17</time>
             </span>
           
-
-          
-
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
+              <span class="post-meta-item-text">In</span>
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a></span>
 
@@ -412,27 +285,9 @@
           
 
           
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          <br>
-          
-
-          
-
-          
 
         </div>
       </header>
-    
 
     
     
@@ -440,19 +295,16 @@
     <div class="post-body" itemprop="articleBody">
 
       
-      
-
-      
-        <p>最近负责部门一个比较老的项目，这个项目为各个业务线提供服务，它使用了一个 redis 集群来缓存一些用户数据，可能是因为机器服役太久了？其中一台 redis 服务器一天晚上挂掉了，而由于历史遗留问题，这个 redis 既没有做主从，也没有过备份，这就导致了整个内存中的数据都挂掉了。这对业务线产生了一部分影响，为了降低影响，业务线的同事从之前的历史日志里回溯了 8G 的历史数据，希望我把这些数据重新导入到 redis。</p>
+        <p>最近负责部门一个比较老的项目，这个项目为各个业务线提供服务，它使用了一个 redis 集群来缓存一些用户数据，使用的是自建的 redis 服务，可能是因为机器服役太久了吧，其中一台 redis 服务器一天晚上挂掉了，而由于历史遗留问题，这个 redis 既没有做主从，也没有过备份，这就导致了整个内存中的数据都挂掉了。这对业务线产生了一部分影响，为了降低影响，业务线的同事从之前的历史日志里回溯了 8G 的历史数据，希望我把这些数据重新导入到 redis。</p>
 <a id="more"></a>
 <h4 id="导入数据"><a href="#导入数据" class="headerlink" title="导入数据"></a>导入数据</h4><p>这些数据的格式是这样的</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">key1=value1</span><br><span class="line">key2=value2</span><br><span class="line">......</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">key1&#x3D;value1</span><br><span class="line">key2&#x3D;value2</span><br><span class="line">......</span><br></pre></td></tr></table></figure>
 <p>一共大概有一亿条的数据。这么多数据，当然要使用程序来进行处理了，这里我选择了 <code>groovy</code> 做脚本语言来开发脚本，主要是考虑到它完全兼容 java 的语法，可以拷贝现有的代码使用，而且作为一个动态语言，语法也比较灵活，而且依赖管理工具 Grape 很好用，引用 jedis 依赖，只需要在脚本中如下声明：</p>
 <figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Grab</span>(<span class="string">'redis.clients:jedis:2.6.2'</span>)</span><br></pre></td></tr></table></figure>
 <p>导入数据的大概逻辑如下：</p>
 <figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jedis config</span></span><br><span class="line"><span class="keyword">def</span> shardJedis = ...... </span><br><span class="line"><span class="keyword">def</span> logFile = <span class="keyword">new</span> File(<span class="string">'/file/path/log'</span>)</span><br><span class="line">logFile.eachLine &#123; line, lineNo -&gt;</span><br><span class="line">    <span class="keyword">if</span> (lineNo.mod(<span class="number">10000</span>) == <span class="number">0</span>)&#123;<span class="comment">//每 10000 行打印一次，以了解进度</span></span><br><span class="line">        println(lineNo)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">def</span> arr = line.split(<span class="string">'='</span>)</span><br><span class="line">    <span class="keyword">def</span> key = arr[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">def</span> value = arr[<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">if</span> (shardJedis.exists(key))&#123;</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    shardJedis.put(key, value)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>需要注意的是不要调用<code>logFile.getText()</code> 方法，它会把全部文件内容都加载到内存中……。<br>代码写完，测试了一下运行正常，然后就去吃饭了，吃完饭回来，发现程序还在努力的跑着，突然感觉有点不对劲，这么久的时间数据并没有处理多少，我来算一下：假设一条数据需要 1ms 处理，那么一共需要 $ 100,000,000  \div (1000 \times 60 \times 60 \times 24) \approx 1$ 天。这也太慢了，不行，需要想个办法加快一下进度。</p>
-<h4 id="多线程的文件处理"><a href="#多线程的文件处理" class="headerlink" title="多线程的文件处理"></a>多线程的文件处理</h4><p>既然一个线程处理太慢，那就多 new 几个线程来吧，人多力量大。先把文件拆分一下，每个线程处理一部分文件，拆分文件一步可以通过代码处理，不过 linux 有一个很好用的命令 <code>split</code> ，它可以按照指定的大小或者行数将大文件拆分为小文件：</p>
+<p>需要注意的是不要调用<code>logFile.getText()</code> 方法，它会把全部文件内容都加载到内存中……。<br>代码写完，测试了一下运行正常，然后就去吃饭了，吃完饭回来，发现程序还在努力的跑着，突然感觉有点不对劲，这么久的时间数据并没有处理多少，我估算了一下：假设一条数据需要 1ms 处理，那么一共需要 $ 100,000,000  \div (1000 \times 60 \times 60 \times 24) \approx 1$ 天。这也太慢了，不行，需要想个办法加快一下进度。</p>
+<h4 id="多线程的文件处理"><a href="#多线程的文件处理" class="headerlink" title="多线程的文件处理"></a>多线程的文件处理</h4><p>既然一个线程处理太慢，那就多 new 几个线程来吧，人多力量大。先把文件拆分一下，每个线程处理一部分文件，拆分文件一步可以通过代码处理，不过 linux 有一个很好用的命令 <code>split</code> ，它可以按照指定的大小或者行数将大文件拆分为小文件，可以直接使用：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">split -l 5000000 -d small_log <span class="comment"># 500w行一个文件</span></span><br></pre></td></tr></table></figure>
 <p>这个命令的效率是挺高的，几分钟就切分了 8G 的数据，然后会在目录下生成许多 <em>small_log00，small_log01</em> 这种命名风格的文件。接下来我准备启动 20 个线程，来处理这些文件，代码大概逻辑如下：</p>
 <figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> threadPool = Executors.newFixedThreadPool(<span class="number">20</span>)</span><br><span class="line"><span class="keyword">for</span> (i=<span class="number">0</span>; i&lt;<span class="number">20</span>; i++)&#123;</span><br><span class="line">    <span class="keyword">def</span> suffix = (i + <span class="string">""</span>).padLeft(<span class="number">2</span>, <span class="string">'0'</span>)</span><br><span class="line">    <span class="keyword">def</span> filePath = <span class="string">"/file/directory/small_log"</span> + suffix</span><br><span class="line">    threadPool.execute(<span class="keyword">new</span> Handler(filePath, shardedJedisPool.getResource()))</span><br><span class="line">&#125;</span><br><span class="line">threadPool.shutdown()</span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LogFileHandler</span> <span class="keyword">implements</span> <span class="title">Runnable</span> &#123;</span></span><br><span class="line">    <span class="comment">//计数器</span></span><br><span class="line">    <span class="keyword">static</span> AtomicLong count = <span class="keyword">new</span> AtomicLong(<span class="number">0</span>L)</span><br><span class="line">    <span class="comment">// jedis client 不是线程安全的</span></span><br><span class="line">    <span class="keyword">private</span> ShardedJedis shardJedis</span><br><span class="line">    <span class="keyword">private</span> String filePath</span><br><span class="line"> </span><br><span class="line">    Handler(String it, ShardedJedis shardJedis) &#123;</span><br><span class="line">        <span class="keyword">this</span>.filePath = filePath;</span><br><span class="line">        <span class="keyword">this</span>.shardJedis = shardJedis</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> run()&#123;</span><br><span class="line">        <span class="keyword">def</span> logFile = <span class="keyword">new</span> File(<span class="string">'/file/path/log'</span>)</span><br><span class="line">        logFile.eachLine &#123; line, lineNo -&gt;</span><br><span class="line">            <span class="keyword">def</span> c = count.incrementAndGet()</span><br><span class="line">            <span class="keyword">if</span> (c.mod(<span class="number">10000</span>) == <span class="number">0</span>) &#123;<span class="comment">//每 10000 行打印一次，以了解进度</span></span><br><span class="line">                println(<span class="string">"========================="</span> + c)</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">def</span> arr = line.split(<span class="string">'='</span>)</span><br><span class="line">            <span class="keyword">def</span> key = arr[<span class="number">0</span>]</span><br><span class="line">            <span class="keyword">def</span> value = arr[<span class="number">1</span>]</span><br><span class="line">            <span class="keyword">if</span> (shardJedis.exists(key))&#123;</span><br><span class="line">                <span class="keyword">return</span></span><br><span class="line">            &#125;</span><br><span class="line">            shardJedis.put(key, value)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -460,7 +312,6 @@
 <h4 id="进一步的优化"><a href="#进一步的优化" class="headerlink" title="进一步的优化"></a>进一步的优化</h4><p>从日志中抓取到的数据是全量的 redis 缓存数据，而集群中有 8 台服务器，只有一台挂了，也就是说有 <em>7/8</em> 的数据是存在的，如果能过滤掉这部分数据，那么处理不是更快了么？因此如果能够提前判断这个 key 是不是落在了坏掉的分片上，就可以不用去 redis 里再查询一次了，可以直接放入 redis。那么代码就可以简化成这样：</p>
 <figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (shardJedis.getShard(key).client.port == ERROR_PORT)&#123;</span><br><span class="line">    shardJedis.put(key, value)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这样很快就搞定了数据的全部导入。</p>
-<p>接下来就联系了运维的同事，切换成了公司数据组提供的 redis 集群的服务。</p>
 <h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><ul>
 <li>合理的切分文件，多线程并发处理，可以加快处理大文件的速度。</li>
 <li>大量的数据先考虑根据特征过滤掉无用的数据，减少实际处理的数据量。</li>
@@ -468,93 +319,69 @@
 <li>重要的数据一定要做<strong>持久化</strong>，redis 集群一定要做主备，且开启 AOF/RDB 备份</li>
 </ul>
 
-      
     </div>
 
     
-
-    
-      
-    
-
     
     
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
         
-          
-        
-        <div class="post-tags">
-          
-            <a href="/tags/文件/" rel="tag"># 文件</a>
-          
-        </div>
       
 
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
+      <footer class="post-footer">
+          
             
-              <a href="/2018/09/11/mysql-transaction-isolation/" rel="next" title="mysql 的事务隔离级别探索">
-                <i class="fa fa-chevron-left"></i> mysql 的事务隔离级别探索
-              </a>
+          
+          <div class="post-tags">
+            
+              <a href="/tags/%E6%96%87%E4%BB%B6/" rel="tag"># 文件</a>
             
           </div>
+        
 
-          <span class="post-nav-divider"></span>
+        
 
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/01/11/develop-project-with-kotlin/" rel="prev" title="使用 kotlin 开发项目的体验">
-                使用 kotlin 开发项目的体验 <i class="fa fa-chevron-right"></i>
-              </a>
-            
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2018/09/11/mysql-transaction-isolation/" rel="next" title="mysql 的事务隔离级别探索">
+                  <i class="fa fa-chevron-left"></i> mysql 的事务隔离级别探索
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/03/27/talking-about-unit-test/" rel="prev" title="谈谈项目中的单元测试">
+                  谈谈项目中的单元测试 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
           </div>
-        </div>
-      
-
-      
-      
-    </footer>
+        
+      </footer>
+    
   </div>
   
   
   
   </article>
 
-
   </div>
 
 
           </div>
           
-
+    
+    
+  <div class="comments" id="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC8zMzMwNS85ODYy"></div>
+  </div>
   
-    <div class="comments" id="comments">
-      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMzMwNS85ODYy"></div>
-    </div>
-
   
-
-
 
         </div>
-        
           
   
   <div class="sidebar-toggle">
@@ -565,151 +392,70 @@
     </div>
   </div>
 
-  <aside id="sidebar" class="sidebar">
+  <aside class="sidebar">
     <div class="sidebar-inner">
-
+        
+        
+        
+        
       
 
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#导入数据"><span class="nav-number">1.</span> <span class="nav-text">导入数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多线程的文件处理"><span class="nav-number">2.</span> <span class="nav-text">多线程的文件处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进一步的优化"><span class="nav-number">3.</span> <span class="nav-text">进一步的优化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
 
       <div class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  
-    <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="tubei">
-  
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/uploads/avatar.png"
+      alt="tubei">
   <p class="site-author-name" itemprop="name">tubei</p>
-  <div class="site-description motion-element" itemprop="description">一只程序员的小屋</div>
+  <div class="site-description" itemprop="description">一只程序员的小屋</div>
 </div>
-
-
   <nav class="site-state motion-element">
-    
       <div class="site-state-item site-state-posts">
         
-          <a href="/archives/">
+          <a href="/archives/%20%7C%7C%20archive">
         
-          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
-    
-
     
       
       
       <div class="site-state-item site-state-categories">
         
           
-            <a href="/categories/">
+            <a href="/categories/%20%7C%7C%20th">
           
         
-        
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">categories</span>
         </a>
       </div>
-    
-
     
       
       
       <div class="site-state-item site-state-tags">
         
           
-            <a href="/tags/">
+            <a href="/tags/%20%7C%7C%20tags">
           
         
-        
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">tags</span>
         </a>
       </div>
@@ -718,79 +464,33 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-          
-          
-        </div>
       </div>
-
-      
-      <!--noindex-->
-        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-            
-            
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#导入数据"><span class="nav-number">1.</span> <span class="nav-text">导入数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多线程的文件处理"><span class="nav-number">2.</span> <span class="nav-text">多线程的文件处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进一步的优化"><span class="nav-number">3.</span> <span class="nav-text">进一步的优化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
-            
-
-          </div>
-        </div>
-      <!--/noindex-->
-      
-
-      
 
     </div>
   </aside>
   <div id="sidebar-dimmer"></div>
 
 
-        
       </div>
     </main>
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">tubei</span>
-
-  
-
-  
 </div>
-
-
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
-
-
-
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.1</div>
   <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.2.0</div>
-
-
-
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.4.0</div>
 
         
+
+
+
+
 
 
 
@@ -802,164 +502,63 @@
         
       </div>
     </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
-    
-
-    
-
-    
-
   </div>
 
   
 
-<script>
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-
-
-
-
-
-
-
-
-
-  
-  <script src="/lib/jquery/index.js?v=3.4.1"></script>
-
-  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
   <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
   <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
 
+<script src="/js/utils.js?v=7.4.0.js"></script>
+
+<script src="/js/motion.js?v=7.4.0.js"></script>
 
 
-
-  <script src="/js/utils.js?v=7.2.0"></script>
-
-  <script src="/js/motion.js?v=7.2.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0.js"></script>
 
 
+<script src="/js/next-boot.js?v=7.4.0.js"></script>
 
-  
-  
-
-
-  <script src="/js/affix.js?v=7.2.0"></script>
-
-  <script src="/js/schemes/pisces.js?v=7.2.0"></script>
 
 
 
   
-  <script src="/js/scrollspy.js?v=7.2.0"></script>
-<script src="/js/post-details.js?v=7.2.0"></script>
 
 
 
-  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   
 
   
-
-  
-
-
-  
-  
-
-  
-  
-
-  
-    
-      <script type="text/x-mathjax-config">
-  
-
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
-      processEscapes: true,
-      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    },
-    TeX: {
-      
-      equationNumbers: {
-        autoNumber: 'AMS'
-      }
-    }
-  });
-  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
-    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
-      if (data.display) {
-        var next = data.script.nextSibling;
-        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
-        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
-      }
-    });
-  });
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for (i = 0; i < all.length; i += 1) {
-      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
-    }
-  });
-</script>
-<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
     
   
 
-
-
-
-
-
-
-
-
-
+  
 
   
-    
-
 
 <script>
   window.livereOptions = {
-    refer: '2018/12/17/large-file-handle-record/'
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
   };
   (function(d, s) {
     var j, e = d.getElementsByTagName(s)[0];
@@ -970,50 +569,6 @@
     e.parentNode.insertBefore(j, e);
   })(document, 'script');
 </script>
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script>
-// GET RESPONSIVE HEIGHT PASSED FROM IFRAME
-
-window.addEventListener("message", function(e) {
-  var data = e.data;
-  if ((typeof data === 'string') && (data.indexOf('ciu_embed') > -1)) {
-    var featureID = data.split(':')[1];
-    var height = data.split(':')[2];
-    $(`iframe[data-feature=${featureID}]`).height(parseInt(height) + 30);
-  }
-}, false);
-</script>
-
-
-
-
-
-
-
-
-  
 
 </body>
 </html>

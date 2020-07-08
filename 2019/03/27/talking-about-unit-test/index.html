@@ -4,132 +4,84 @@
 
 
 
-
-
-
-
-
-
-
-  
-
-
-<html class="theme-next pisces use-motion" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.8.0">
+<html lang="zh-Hans">
+<head>
   <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
 
-
-
-
-
-
-
-
-
-
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
-
-
-
-
-
-
-<link rel="stylesheet" href="/css/main.css?v=7.2.0">
-
-
-
-
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
 
 
 <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
 
 
-
-
-
-
-
-
-<script id="hexo.configurations">
+<script id="hexo-configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
     scheme: 'Pisces',
-    version: '7.2.0',
+    version: '7.4.0',
+    exturl: false,
     sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
-    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
     copycode: {"enable":true,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"save":"auto","color":"#222"},
     fancybox: false,
     mediumzoom: false,
     lazyload: false,
     pangu: false,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     algolia: {
-      applicationID: '',
+      appID: '',
       apiKey: '',
       indexName: '',
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     translation: {
       copy_button: 'Copy',
       copy_success: 'Copied',
       copy_failure: 'Copy failed'
-    }
+    },
+    sidebarPadding: 40
   };
 </script>
 
-  <meta name="description" content="在项目的开发过程中，代码的质量保证是非常重要的，它对项目的进度和团队的开发效率有着直接的影响，在整个软件工程中，代码质量的保证也是极其重要的一环。而对于如何提升代码质量，在软件工程界有着一些系统化的方法，如统一的编码规范、静态代码分析、code review、结对编程、单元测试、集成测试等。而单元测试作为必不可少的一环，其重要性不言而喻。">
-<meta name="keywords" content="unit test">
+  <meta name="description" content="在项目的开发过程中，很多同事不喜欢也不愿意写单元测试，但是它对代码的质量保证是非常重要的，也对项目的进度和团队的开发效率有着直接的影响，在整个软件工程中，代码质量的保证是极其重要的一环。对于如何提升代码质量，在软件工程界有着一些系统化的方法，如统一的编码规范、静态代码分析、code review、结对编程、单元测试、集成测试等。而单元测试作为必不可少的一环，其重要性不言而喻。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="谈谈项目中的单元测试">
 <meta property="og:url" content="http://yoursite.com/2019/03/27/talking-about-unit-test/index.html">
 <meta property="og:site_name" content="tubei">
-<meta property="og:description" content="在项目的开发过程中，代码的质量保证是非常重要的，它对项目的进度和团队的开发效率有着直接的影响，在整个软件工程中，代码质量的保证也是极其重要的一环。而对于如何提升代码质量，在软件工程界有着一些系统化的方法，如统一的编码规范、静态代码分析、code review、结对编程、单元测试、集成测试等。而单元测试作为必不可少的一环，其重要性不言而喻。">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-11T07:27:47.033Z">
+<meta property="og:description" content="在项目的开发过程中，很多同事不喜欢也不愿意写单元测试，但是它对代码的质量保证是非常重要的，也对项目的进度和团队的开发效率有着直接的影响，在整个软件工程中，代码质量的保证是极其重要的一环。对于如何提升代码质量，在软件工程界有着一些系统化的方法，如统一的编码规范、静态代码分析、code review、结对编程、单元测试、集成测试等。而单元测试作为必不可少的一环，其重要性不言而喻。">
+<meta property="article:published_time" content="2019-03-27T09:28:12.000Z">
+<meta property="article:modified_time" content="2020-07-07T12:40:46.050Z">
+<meta property="article:author" content="tubei">
+<meta property="article:tag" content="unit test">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="谈谈项目中的单元测试">
-<meta name="twitter:description" content="在项目的开发过程中，代码的质量保证是非常重要的，它对项目的进度和团队的开发效率有着直接的影响，在整个软件工程中，代码质量的保证也是极其重要的一环。而对于如何提升代码质量，在软件工程界有着一些系统化的方法，如统一的编码规范、静态代码分析、code review、结对编程、单元测试、集成测试等。而单元测试作为必不可少的一环，其重要性不言而喻。">
-
-
-
-
-
-  
-  
   <link rel="canonical" href="http://yoursite.com/2019/03/27/talking-about-unit-test/">
 
 
-
-<script id="page.configurations">
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
   };
 </script>
 
-  
   <title>谈谈项目中的单元测试 | tubei</title>
   
-
-
-
-
 
 
   <script>
@@ -147,10 +99,8 @@
 
 
 
-
   <noscript>
   <style>
-  .use-motion .motion-element,
   .use-motion .brand,
   .use-motion .menu-item,
   .sidebar-inner,
@@ -159,7 +109,7 @@
   .use-motion .comments,
   .use-motion .post-header,
   .use-motion .post-body,
-  .use-motion .collection-title { opacity: initial; }
+  .use-motion .collection-header { opacity: initial; }
 
   .use-motion .logo,
   .use-motion .site-title,
@@ -176,33 +126,22 @@
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container use-motion">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
+      <div class="header-inner"><div class="site-brand-container">
   <div class="site-meta">
-    
 
-    <div class="custom-logo-site-title">
+    <div>
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">tubei</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
-    
-      
         <p class="site-subtitle">我准备好了</p>
       
-    
-    
   </div>
 
   <div class="site-nav-toggle">
@@ -215,136 +154,91 @@
 </div>
 
 
-
 <nav class="site-nav">
   
-    <ul id="menu" class="menu">
+  <ul id="menu" class="menu">
+      
+      
       
         
-        
-        
-          
-          <li class="menu-item menu-item-home">
-
-    
-    
+        <li class="menu-item menu-item-home">
       
-    
-
     
 
     <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
 
   </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-archives">
-
-    
-    
       
-    
-
-    
-
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
-
-  </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-tags">
-
-    
-    
       
-    
-
+      
+        
+        <li class="menu-item menu-item-tags">
+      
     
 
     <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
 
   </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-categories">
-
-    
-    
       
-    
-
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
     
 
     <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
 
   </li>
+      
+      
+      
         
-        
-        
-          
-          <li class="menu-item menu-item-commonweal">
-
-    
-    
+        <li class="menu-item menu-item-archives">
       
     
 
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-commonweal">
+      
     
 
     <a href="/404/" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>Commonweal 404</a>
 
   </li>
+  </ul>
 
-      
-      
-    </ul>
-  
-
-  
-
-  
 </nav>
-
-
-
 </div>
     </header>
 
     
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
 
 
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
-          
             
 
-          
           <div id="content" class="content">
             
 
   <div id="posts" class="posts-expand">
-    
-
-  
-
+      <article itemscope itemtype="http://schema.org/Article">
   
   
   
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
+  <div class="post-block post">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/27/talking-about-unit-test/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -356,33 +250,18 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="tubei">
     </span>
-
-    
       <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">谈谈项目中的单元测试
 
-        
-        
-          <h1 class="post-title" itemprop="name headline">谈谈项目中的单元测试
-
-              
-            
-          </h1>
-        
+          
+        </h1>
 
         <div class="post-meta">
-
-          
-          
-          
-
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
+              <span class="post-meta-item-text">Posted on</span>
 
               
                 
@@ -391,17 +270,11 @@
               <time title="Created: 2019-03-27 17:28:12" itemprop="dateCreated datePublished" datetime="2019-03-27T17:28:12+08:00">2019-03-27</time>
             </span>
           
-
-          
-
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
+              <span class="post-meta-item-text">In</span>
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a></span>
 
@@ -412,27 +285,9 @@
           
 
           
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          <br>
-          
-
-          
-
-          
 
         </div>
       </header>
-    
 
     
     
@@ -440,16 +295,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-      
-
-      
-        <p>在项目的开发过程中，代码的质量保证是非常重要的，它对项目的进度和团队的开发效率有着直接的影响，在整个软件工程中，代码质量的保证也是极其重要的一环。而对于如何提升代码质量，在软件工程界有着一些系统化的方法，如统一的编码规范、静态代码分析、code review、结对编程、单元测试、集成测试等。而单元测试作为必不可少的一环，其重要性不言而喻。<br><a id="more"></a><br>首先来谈谈单元测试的目的，单元测试其实是写给开发人员自己的，最大的目的就是<strong>尽早在尽量小的范围内暴露错误</strong>，要知道项目的代码规范和 bug 的修复成本往往是成正比的，而程序员是不可能避免错误产出的。同时单元测试也有以下好处：</p>
+        <p>在项目的开发过程中，很多同事不喜欢也不愿意写单元测试，但是它对代码的质量保证是非常重要的，也对项目的进度和团队的开发效率有着直接的影响，在整个软件工程中，代码质量的保证是极其重要的一环。对于如何提升代码质量，在软件工程界有着一些系统化的方法，如统一的编码规范、静态代码分析、code review、结对编程、单元测试、集成测试等。而单元测试作为必不可少的一环，其重要性不言而喻。<br><a id="more"></a><br>首先来谈谈单元测试的目的，单元测试其实是写给开发人员自己的，最大的目的就是<strong>尽早在尽量小的范围内暴露错误</strong>，要知道项目的代码规范和 bug 的修复成本往往是成正比的，而程序员是不可能避免错误产出的。同时单元测试也有以下好处：</p>
 <ul>
 <li><strong>快速反馈</strong>：一个模块的代码完成后，不知道其运行情况如何，这时候进行单元测试，可以快速发现问题，将这种问题在开发的时候尽早发现，尽早解决，保证交付测试的代码质量。</li>
 <li><strong>方便重构</strong>：软件开发中，随着业务的不断发展，之前的代码设计可能已经满足不了现在的需求，因此进行重构来保证良好的代码结构是非常必要的。如何保证重构完成后原来的逻辑不受影响呢？这就需要对应的单元测试覆盖。重构完成后，单测测试通过，基本可以保证原代码逻辑的正确性。当然这要求单测的质量要足够好，覆盖率高。</li>
 <li><strong>自我 review</strong>：写单测的过程就是一个自我的 code review 的过程，通过对自己代码的调用，可以及时发现不合理的调用方式或者代码设计上的问题，并给予修正，不至于交付测试后再发现更改。</li>
 </ul>
-<h4 id="单元测试的规范"><a href="#单元测试的规范" class="headerlink" title="单元测试的规范"></a>单元测试的规范</h4><p>为了达到<strong>尽早在尽量小的范围暴露错误</strong>，对单测的编写要求必须规范。 很多单元测试都存在以下的情况：</p>
+<h4 id="单元测试的规范"><a href="#单元测试的规范" class="headerlink" title="单元测试的规范"></a>单元测试的规范</h4><p>为了达到<strong>尽早在尽量小的范围暴露错误</strong>，对单测的编写要求必须规范。 看了很多同事写的单元测试都存在以下的情况：</p>
 <ul>
 <li>测试中使用 <code>System.out.println</code> 而非 <code>assert</code></li>
 <li>单测覆盖率过低</li>
@@ -457,7 +309,7 @@
 </ul>
 <p>首先单元测试应该能暴露错误，在 test case 中写个 <code>System.out.println</code>，人肉观察一下结果，确定结果是否正确。这种写法根本不是单测，即使当时被测试代码是正确的，后续这些代码还有可能被修改，而一旦这些代码被改错了。<code>println</code> 根本不会报错，这种所谓的”单测”连暴露错误的作用都起不到。</p>
 <p>其次单元测试的 <code>assert</code> 要有足够的强度，不能简单的 <code>assertNotNull</code> 就完事了，如果其中的属性产生了变动，依然可能引起 bug.</p>
-<h4 id="单元测试的覆盖率"><a href="#单元测试的覆盖率" class="headerlink" title="单元测试的覆盖率"></a>单元测试的覆盖率</h4><p>单元测试确实很好，但是在繁重的开发任务中，高覆盖率的单测要求对于开发人员来说是个不小的负担，尤其是现在很多公司，都有点过度追求单元测试的覆盖率，要求 95% 甚至 100% 的单元测试覆盖，在我看来这完全是脱离了开发的实际场景。</p>
+<h4 id="单元测试的覆盖率"><a href="#单元测试的覆盖率" class="headerlink" title="单元测试的覆盖率"></a>单元测试的覆盖率</h4><p>单元测试确实很好，但是在繁重的开发任务中，高覆盖率的单测要求对于开发人员来说是个不小的负担，尤其是现在很多公司，都有点过度追求单元测试的覆盖率，要求 95% 甚至 100% 的单元测试覆盖，我个人看来这完全是脱离了开发的实际场景。</p>
 <p>在 <a href="https://stackoverflow.com/" target="_blank" rel="noopener">StackOverFlow</a> 上，就有这么个问题：<a href="https://stackoverflow.com/questions/153234/how-deep-are-your-unit-tests" target="_blank" rel="noopener">how deep are your unit tests</a>， 而他的高赞回答是这样的：</p>
 <blockquote>
 <p>I get paid for code that works, not for tests, so my philosophy is to test as little as possible to reach a given level of confidence (I suspect this level of confidence is high compared to industry standards, but that could just be hubris). If I don’t typically make a kind of mistake (like setting the wrong variables in a constructor), I don’t test for it. I do tend to make sense of test errors, so I’m extra careful when I have logic with complicated conditionals. When coding on a team, I modify my strategy to carefully test code that we, collectively, tend to get wrong.</p>
@@ -493,93 +345,69 @@
 <p>而集成测试可能会依赖很多外部系统，初始化比较复杂，耗时较长，一般是功能层面的测试，而且测试的代码逻辑比较复杂，出错后的排查成本也较高。</p>
 <h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>单测在项目开发中是必不可少的一环，但是单测的粒度如何，覆盖率和单测质量如何衡量，这些都是没有标准答案的，都需要结合开发团队和项目的具体情况来分析。根据实际的情况制定标准，合适的就是好的。</p>
 
-      
     </div>
 
     
-
-    
-      
-    
-
     
     
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
         
-          
-        
-        <div class="post-tags">
-          
-            <a href="/tags/unit-test/" rel="tag"># unit test</a>
-          
-        </div>
       
 
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
+      <footer class="post-footer">
+          
             
-              <a href="/2019/01/11/develop-project-with-kotlin/" rel="next" title="使用 kotlin 开发项目的体验">
-                <i class="fa fa-chevron-left"></i> 使用 kotlin 开发项目的体验
-              </a>
+          
+          <div class="post-tags">
+            
+              <a href="/tags/unit-test/" rel="tag"># unit test</a>
             
           </div>
+        
 
-          <span class="post-nav-divider"></span>
+        
 
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/06/28/multi-keys-single-value-in-redis/" rel="prev" title="redis实现多个 key 对应一个 value">
-                redis实现多个 key 对应一个 value <i class="fa fa-chevron-right"></i>
-              </a>
-            
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2018/12/17/large-file-handle-record/" rel="next" title="记一次大文件的处理">
+                  <i class="fa fa-chevron-left"></i> 记一次大文件的处理
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/06/28/multi-keys-single-value-in-redis/" rel="prev" title="redis实现多个 key 对应一个 value">
+                  redis实现多个 key 对应一个 value <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
           </div>
-        </div>
-      
-
-      
-      
-    </footer>
+        
+      </footer>
+    
   </div>
   
   
   
   </article>
 
-
   </div>
 
 
           </div>
           
-
+    
+    
+  <div class="comments" id="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC8zMzMwNS85ODYy"></div>
+  </div>
   
-    <div class="comments" id="comments">
-      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMzMwNS85ODYy"></div>
-    </div>
-
   
-
-
 
         </div>
-        
           
   
   <div class="sidebar-toggle">
@@ -590,151 +418,70 @@
     </div>
   </div>
 
-  <aside id="sidebar" class="sidebar">
+  <aside class="sidebar">
     <div class="sidebar-inner">
-
+        
+        
+        
+        
       
 
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#单元测试的规范"><span class="nav-number">1.</span> <span class="nav-text">单元测试的规范</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#单元测试的覆盖率"><span class="nav-number">2.</span> <span class="nav-text">单元测试的覆盖率</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#单元测试-vs-集成测试"><span class="nav-number">3.</span> <span class="nav-text">单元测试 vs 集成测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
 
       <div class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  
-    <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="tubei">
-  
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/uploads/avatar.png"
+      alt="tubei">
   <p class="site-author-name" itemprop="name">tubei</p>
-  <div class="site-description motion-element" itemprop="description">一只程序员的小屋</div>
+  <div class="site-description" itemprop="description">一只程序员的小屋</div>
 </div>
-
-
   <nav class="site-state motion-element">
-    
       <div class="site-state-item site-state-posts">
         
-          <a href="/archives/">
+          <a href="/archives/%20%7C%7C%20archive">
         
-          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
-    
-
     
       
       
       <div class="site-state-item site-state-categories">
         
           
-            <a href="/categories/">
+            <a href="/categories/%20%7C%7C%20th">
           
         
-        
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">categories</span>
         </a>
       </div>
-    
-
     
       
       
       <div class="site-state-item site-state-tags">
         
           
-            <a href="/tags/">
+            <a href="/tags/%20%7C%7C%20tags">
           
         
-        
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">tags</span>
         </a>
       </div>
@@ -743,79 +490,33 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-          
-          
-        </div>
       </div>
-
-      
-      <!--noindex-->
-        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-            
-            
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#单元测试的规范"><span class="nav-number">1.</span> <span class="nav-text">单元测试的规范</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#单元测试的覆盖率"><span class="nav-number">2.</span> <span class="nav-text">单元测试的覆盖率</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#单元测试-vs-集成测试"><span class="nav-number">3.</span> <span class="nav-text">单元测试 vs 集成测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
-            
-
-          </div>
-        </div>
-      <!--/noindex-->
-      
-
-      
 
     </div>
   </aside>
   <div id="sidebar-dimmer"></div>
 
 
-        
       </div>
     </main>
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">tubei</span>
-
-  
-
-  
 </div>
-
-
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
-
-
-
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.1</div>
   <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.2.0</div>
-
-
-
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.4.0</div>
 
         
+
+
+
+
 
 
 
@@ -827,106 +528,39 @@
         
       </div>
     </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
-    
-
-    
-
-    
-
   </div>
 
   
 
-<script>
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-
-
-
-
-
-
-
-
-
-  
-  <script src="/lib/jquery/index.js?v=3.4.1"></script>
-
-  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
   <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
   <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
 
+<script src="/js/utils.js?v=7.4.0.js"></script>
+
+<script src="/js/motion.js?v=7.4.0.js"></script>
 
 
-
-  <script src="/js/utils.js?v=7.2.0"></script>
-
-  <script src="/js/motion.js?v=7.2.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0.js"></script>
 
 
+<script src="/js/next-boot.js?v=7.4.0.js"></script>
 
-  
-  
-
-
-  <script src="/js/affix.js?v=7.2.0"></script>
-
-  <script src="/js/schemes/pisces.js?v=7.2.0"></script>
 
 
 
   
-  <script src="/js/scrollspy.js?v=7.2.0"></script>
-<script src="/js/post-details.js?v=7.2.0"></script>
 
 
 
-  <script src="/js/next-boot.js?v=7.2.0"></script>
-
-  
-
-  
-
-  
 
 
-  
-  
 
-  
-  
 
-  
+
+
+
 
 
 
@@ -939,12 +573,16 @@
 
 
   
-    
 
+  
+
+  
+
+  
 
 <script>
   window.livereOptions = {
-    refer: '2019/03/27/talking-about-unit-test/'
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
   };
   (function(d, s) {
     var j, e = d.getElementsByTagName(s)[0];
@@ -955,50 +593,6 @@
     e.parentNode.insertBefore(j, e);
   })(document, 'script');
 </script>
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script>
-// GET RESPONSIVE HEIGHT PASSED FROM IFRAME
-
-window.addEventListener("message", function(e) {
-  var data = e.data;
-  if ((typeof data === 'string') && (data.indexOf('ciu_embed') > -1)) {
-    var featureID = data.split(':')[1];
-    var height = data.split(':')[2];
-    $(`iframe[data-feature=${featureID}]`).height(parseInt(height) + 30);
-  }
-}, false);
-</script>
-
-
-
-
-
-
-
-
-  
 
 </body>
 </html>
