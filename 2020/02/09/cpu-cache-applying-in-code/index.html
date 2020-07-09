@@ -55,16 +55,16 @@
   };
 </script>
 
-  <meta name="description" content="在学习 golang 的时候看到了一段有趣的代码，这段代码实现了同样的功能，然而性能差距非常大。">
+  <meta name="description" content="在学习 golang 的时候看到了一段有趣的代码，这段代码里两个方法有着相同的逻辑，然而性能差距非常大。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CPU 缓存和代码中的应用">
 <meta property="og:url" content="http://yoursite.com/2020/02/09/cpu-cache-applying-in-code/index.html">
 <meta property="og:site_name" content="tubei">
-<meta property="og:description" content="在学习 golang 的时候看到了一段有趣的代码，这段代码实现了同样的功能，然而性能差距非常大。">
+<meta property="og:description" content="在学习 golang 的时候看到了一段有趣的代码，这段代码里两个方法有着相同的逻辑，然而性能差距非常大。">
 <meta property="og:image" content="http://yoursite.com/2020/02/09/uploads/jmh-result.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/02/09/uploads/cpu-cache.png">
 <meta property="article:published_time" content="2020-02-09T08:55:49.000Z">
-<meta property="article:modified_time" content="2020-07-09T09:38:17.774Z">
+<meta property="article:modified_time" content="2020-07-09T09:39:19.120Z">
 <meta property="article:author" content="tubei">
 <meta property="article:tag" content="cache">
 <meta name="twitter:card" content="summary">
@@ -298,7 +298,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>在学习 golang 的时候看到了一段有趣的代码，这段代码实现了同样的功能，然而性能差距非常大。</p>
+        <p>在学习 golang 的时候看到了一段有趣的代码，这段代码里两个方法有着相同的逻辑，然而性能差距非常大。</p>
 <a id="more"></a>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//code 1</span></span><br><span class="line"><span class="keyword">for</span> i := <span class="number">0</span>; i &lt; matrixLength; i++ &#123;</span><br><span class="line">   <span class="keyword">for</span> j := <span class="number">0</span>; j &lt; matrixLength; j++ &#123;</span><br><span class="line">    matrixA[i][j] = matrixA[i][j] + matrixB[i][j]</span><br><span class="line">   &#125;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="comment">//code 2</span></span><br><span class="line"><span class="keyword">for</span> i := <span class="number">0</span>; i &lt; matrixLength; i++ &#123;</span><br><span class="line">   <span class="keyword">for</span> j := <span class="number">0</span>; j &lt; matrixLength; j++ &#123;</span><br><span class="line">    matrixA[i][j] = matrixA[i][j] + matrixB[j][i] <span class="comment">//这里交互了 i,j 的位置</span></span><br><span class="line">   &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 <p>上面两段代码在 go 语言里执行，性能有近 3 倍的差距，我在 Java 中也写了一段类似的代码，使用 JMH 进行了测试：</p>
